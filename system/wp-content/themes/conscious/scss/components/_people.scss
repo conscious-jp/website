@@ -1,0 +1,178 @@
+.people-head {
+  margin-top: 20px;
+  display: table;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.people-head__thumb {
+  width: 40%;
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 20px;
+  line-height: 0;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+.people-head__info {
+  width: 60%;
+  display: table-cell;
+  vertical-align: top;
+  .people-info:last-child {
+
+  }
+}
+.people-info {
+  display: table;
+  width: 100%;
+  padding: 10px 0;
+  margin: 0;
+  border-top: 1px dashed $black;
+  &:last-child {
+    border-bottom: 1px dashed $black;
+  }
+}
+.people-info__head,
+.people-info__body {
+  display: table-cell;
+  vertical-align: top;
+}
+.people-info__head {
+  width: 20%;
+  padding-right: 10px;
+  font-weight: bold;
+}
+.people-info__body {
+  width: 80%;
+}
+.people__subtitle {
+  background: #eee;
+  padding: 8px 15px;
+  color: $black;
+  font-family: $sans-title-font;
+  letter-spacing: .05em;
+  font-size: 23px;
+  margin: 0 0 15px 0;
+  @include border-radius(3px);
+}
+.people-block {
+  margin: 30px 0 0 0;
+}
+.people-block__body {
+  padding: 0 10px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.people-sns {
+  list-style: none;
+  margin: 0;
+  padding: 15px 0 0 0;
+  border-top: 1px dashed $black;
+  letter-spacing: -.4em;
+  li {
+    $size: 40px;
+    display: inline-block;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    margin-right: 10px;
+    letter-spacing: normal;
+  }
+  a {
+    display: block;
+    font-size: 20px;
+    background-color: $black;
+    color: $white;
+    text-align: center;
+    border-radius: 3px;
+    &:hover {
+      color: $base-color;
+    }
+  }
+}
+
+.relate-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    position: relative;
+    margin: 15px 0;
+    padding-left: 20px;
+  }
+  i {
+    position: absolute;
+    left: 0;
+    top: 4px;
+  }
+}
+
+.people-part {
+  width: 31.33%;
+  margin: 5px 3% 20px 0;
+  float: left;
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+  &:nth-child(3n+1) {
+    clear: both;
+  }
+  dt {
+    font-size: 0;
+    margin: 0 0 10px 0;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  dd {
+    margin: 0;
+    padding: 0;
+  }
+  h3 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: $black;
+    font-family: $sans-title-font;
+    line-height: 1.2;
+  }
+  i {
+    margin-right: 5px;
+  }
+  a {
+    color: $black;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  p {
+    background-color: $bg-color;
+    padding: 6px 10px;
+    border-radius: 3px;
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: $break-point-small) {
+  .people-part {
+    width: 48%;
+    margin-right: 4%;
+    &:nth-child(3n) {
+      margin-right: 4%;
+    }
+    &:nth-child(3n+1) {
+      clear: none;
+    }
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+  }
+}

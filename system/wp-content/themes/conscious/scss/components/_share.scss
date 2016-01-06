@@ -1,0 +1,25 @@
+.share-box {
+  list-style: none;
+  padding: 15px;
+  margin: 15px 0;
+  background: $bg-color;
+  letter-spacing: -.4em;
+  text-align: center;
+}
+.share-box__list {
+  display: inline-block;
+  letter-spacing: normal;
+  vertical-align: top;
+  margin: 5px;
+  height: 21px;
+}
+
+.share-box__list--fb { width: 71px; }
+.share-box__list--tw { width: 75px; }
+.share-box__list--hb { width: 80px; }
+.share-box__list--pt { width: 60px; }
+.share-box__list--gp { width: 30px; }
+
+.fb_iframe_widget span {
+  vertical-align: top !important;
+}

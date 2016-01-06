@@ -1,0 +1,50 @@
+input[type='text'],
+input[type='password'],
+input[type='email'],
+textarea {
+  border: 2px solid $black;
+  outline: 0;
+  padding: 6px 10px;
+  background: #f9f9f9;
+  -webkit-appearance: none;
+  @include border-radius(0);
+  @include box-shadow(0 1px 3px rgba(0,0,0,.2) inset);
+  @include box-sizing(border-box);
+  &:focus {
+    background: $white;
+    @include box-shadow(none);
+  }
+  &.full {
+    width: 100%;
+  }
+}
+a.btn,
+button,
+input[type='button'],
+input[type='submit'] {
+  background: $black;
+  color: $white;
+  border: none;
+  padding: 0 16px;
+  outline: 0;
+  text-align: center;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  font-weight: bold;
+  border-radius: 4px;
+  &:hover {
+    color: $base-color;
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: $break-point-small) {
+  input[type='text'],
+  input[type='password'],
+  input[type='email'],
+  textarea {
+    width: 100%;
+    display: block;
+  }
+}

@@ -1,0 +1,43 @@
+// Color
+$black:                   #000;
+$white:                   #fff;
+$text-color:              #333;
+$link-color:              #069;
+$base-color:              #f9e401;
+$bg-color:                #f1f1f1;
+$read-color:              #1789c4;
+$radio-color:             #52aa13;
+$watch-color:             #d72058;
+$sp-color:                #e79b24;
+$hover-color:             #f6f6f6;
+
+
+// Font
+$base-font-size:          15px;
+$base-line-height:        1.6;
+$base-font-family:        "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","メイリオ",Meiryo,"ＭＳ Ｐゴシック","Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
+$mono-font-family:        Verdana;
+$sans-title-font:         "RodinNTLGPro-EB";
+$sans-bold-font:          "RodinNTLGPro-B";
+$serif-title-font:        "MatissePro-EB";
+$num-font:                'Lato', sans-serif;
+
+
+//Layout
+$content-width:           1120px;
+$sidebar-width:           300px;
+$gutter-size:             30px;
+$gutter-res-size:         20px;
+$header-height:           320px;
+$mb-header-height:        56px;
+$nav-height:              60px;
+$people-thumb-size:       46px;
+$break-point-full:        $content-width + ($gutter-res-size * 2);
+$break-point-large:       980px;
+$break-point-middle:      780px;
+$break-point-small:       600px;
+$break-point-xsmall:      480px;
+
+
+// Other
+$margin-list:             0, 2, 3, 5, 10, 15, 20, 25, 30, 40, 50, 60;

@@ -1,0 +1,16 @@
+{
+  "name": "conscious",
+  "version": "1.0",
+  "authors": [
+    "rayfields"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.2",
+    "fontawesome": "~4.2.0"
+  }
+}

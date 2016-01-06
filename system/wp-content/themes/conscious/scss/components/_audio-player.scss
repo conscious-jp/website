@@ -1,0 +1,19 @@
+.mejs-container,
+.mejs-controls .mejs-time-rail .mejs-time-total {
+  outline: 0;
+  background: lighten($black, 25%) !important;
+}
+.mejs-offscreen {
+  display: none !important;
+}
+.mejs-controls .mejs-time-rail .mejs-time-loaded {
+  background: lighten($black, 40%) !important;
+}
+.mejs-controls .mejs-time-rail .mejs-time-current {
+  background: $base-color !important;
+}
+.mejs-currenttime,
+.mejs-duration {
+  line-height: 16px !important;
+}
+

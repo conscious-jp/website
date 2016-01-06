@@ -1,0 +1,78 @@
+.post__cat {
+  margin: 0;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 5;
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &.cat--read a { color: $read-color; }
+  &.cat--radios a { color: $radio-color; }
+  &.cat--watch a { color: $watch-color; }
+  .fa {
+    font-size: 24px;
+    font-weight: normal;
+    margin-right: 8px;
+    position: relative;
+    bottom: -3px;
+  }
+}
+
+.post__meta {
+  height: $people-thumb-size;
+  margin-top: 15px;
+  position:relative;
+}
+.post__people {
+  /*float: left;*/
+  position:absolute;
+  width:100%;
+  height: $people-thumb-size;
+}
+.post__date {
+  float: right;
+  margin: 0;
+  line-height: $people-thumb-size;
+  font-family: $num-font;
+  font-weight: 700;
+  color: #999;
+  .fa {
+    margin-right: 5px;
+    font-weight: normal;
+  }
+}
+
+.people-lists {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -.4em;
+}
+.people-lists__list {
+  display: inline-block;
+  letter-spacing: normal;
+  width: $people-thumb-size;
+  line-height: 0;
+  margin: 0 5px;
+  @include border-radius(50%);
+  &:first-child {margin-left: 0;}
+  &:last-child {margin-right: 0;}
+  a {
+    display: block;
+    border: 1px solid #ddd;
+    @include border-radius(50%);
+    &:hover {
+      border: 1px solid $base-color;
+    }
+  }
+  img {
+    width: 100%;
+    height: auto;
+    @include border-radius(50%);
+  }
+}

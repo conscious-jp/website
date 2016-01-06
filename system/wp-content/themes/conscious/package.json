@@ -1,0 +1,16 @@
+{
+  "name": "conscious",
+  "version": "1.0.0",
+  "description": "conscious wordpress theme",
+  "main": "index.js",
+  "scripts": {
+    "watch": "gulp watch"
+  },
+  "author": "rayfields",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-compass": "*",
+    "gulp-watch": "*"
+  }
+}
