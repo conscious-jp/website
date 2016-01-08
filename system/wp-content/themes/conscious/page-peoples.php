@@ -29,6 +29,8 @@ $peopleParents = get_terms('people', array(
       foreach($peoples as $person):
       $pThumb = get_field('people_avatar', 'people'.'_'.$person->term_id);
       $pURL = get_term_link($person);
+      $pslug = $person->slug;
+      if($pslug !== 'qmoto' || $pslug !== 'genki' || $pslug !== 'miyamoto' || $pslug !== 'ariup' || $pslug !== 'honda'):
     ?>
     <div class="members__list">
       <a href="<?php echo $pURL; ?>">
@@ -38,7 +40,7 @@ $peopleParents = get_terms('people', array(
         <h2 class="members__name"><?php echo $person->name; ?></h2>
       </a>
     </div>
-    <?php endforeach; ?>
+    <?php endif; endforeach; ?>
     </div>
   </div>
   <?php endforeach; ?>
