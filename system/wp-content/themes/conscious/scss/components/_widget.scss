@@ -138,21 +138,23 @@ $searchHeight: 46px;
 Tag
 */
 .tagcloud {
-  padding: 15px;
+  padding: 15px 0;
   letter-spacing: -.4em;
   a {
     display: inline-block;
-    letter-spacing: normal;
-    margin: 5px;
-    font-size: 12px !important;
-    padding: 4px 10px;
+    vertical-align: text-bottom;
+    letter-spacing: .1em;
+    margin: 3px 5px;
+    padding: 4px 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
     color: $text-color;
     font-weight: normal;
+    font-family: $sans-bold-font;
+    background-color: $hover-color;
     &:hover {
       text-decoration: none;
-      background-color: $hover-color;
+      background-color: $white;
     }
   }
 }

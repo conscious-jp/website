@@ -95,9 +95,12 @@
       <dd class="widget__body">
         <div class="tagcloud">
           <?php wp_tag_cloud(array(
+            'smallest' => 10,
+            'largest' => 23,
+            'unit' => 'px',
             'number' => 20,
             'orderby' => 'count',
-            'order' => 'RAND'
+            'order' => 'DESC'
           )); ?>
         </div>
       </dd>
