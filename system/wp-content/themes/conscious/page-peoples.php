@@ -5,8 +5,9 @@
 get_header();
 
 $peopleParents = get_terms('people', array(
-    'orderby' => 'order',
-    'parent' => 0
+  'hide_empty' => false,
+  'orderby' => 'order',
+  'parent' => 0
 ));
 ?>
 
@@ -16,7 +17,7 @@ $peopleParents = get_terms('people', array(
   </div>
 
   <?php foreach($peopleParents as $parents): ?>
-  <div class="members clearfix">
+  <div class="members">
     <h2 class="members__title"><?php echo $parents->name; ?></h2>
     <?php
       $peoples = get_terms('people', array(
@@ -27,13 +28,15 @@ $peopleParents = get_terms('people', array(
       $pThumb = get_field('people_avatar', 'people'.'_'.$person->term_id);
       $pURL = get_term_link($person);
     ?>
-    <div class="members__list">
-      <a href="<?php echo $pURL; ?>">
-        <div class="members__thumb">
-          <img src="<?php echo $pThumb; ?>" alt="<?php echo $person->name; ?>">
-        </div>
-        <h2 class="members__name"><?php echo $person->name; ?></h2>
-      </a>
+    <div class="clearfix">
+      <div class="members__list">
+        <a href="<?php echo $pURL; ?>">
+          <div class="members__thumb">
+            <img src="<?php echo $pThumb; ?>" alt="<?php echo $person->name; ?>">
+          </div>
+          <h2 class="members__name"><?php echo $person->name; ?></h2>
+        </a>
+      </div>
     </div>
     <?php endforeach; ?>
   </div>
