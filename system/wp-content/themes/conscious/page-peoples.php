@@ -19,8 +19,10 @@ $peopleParents = get_terms('people', array(
   <?php foreach($peopleParents as $parents): ?>
   <div class="members">
     <h2 class="members__title"><?php echo $parents->name; ?></h2>
+    <div class="clearfix">
     <?php
       $peoples = get_terms('people', array(
+        'hide_empty' => false,
         'orderby' => 'order',
         'parent' => $parents->term_id
       ));
@@ -28,17 +30,16 @@ $peopleParents = get_terms('people', array(
       $pThumb = get_field('people_avatar', 'people'.'_'.$person->term_id);
       $pURL = get_term_link($person);
     ?>
-    <div class="clearfix">
-      <div class="members__list">
-        <a href="<?php echo $pURL; ?>">
-          <div class="members__thumb">
-            <img src="<?php echo $pThumb; ?>" alt="<?php echo $person->name; ?>">
-          </div>
-          <h2 class="members__name"><?php echo $person->name; ?></h2>
-        </a>
-      </div>
+    <div class="members__list">
+      <a href="<?php echo $pURL; ?>">
+        <div class="members__thumb">
+          <img src="<?php echo $pThumb; ?>" alt="<?php echo $person->name; ?>">
+        </div>
+        <h2 class="members__name"><?php echo $person->name; ?></h2>
+      </a>
     </div>
     <?php endforeach; ?>
+    </div>
   </div>
   <?php endforeach; ?>
 </div>
