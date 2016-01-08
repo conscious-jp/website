@@ -63,7 +63,7 @@ get_header(); ?>
 
     <?php
       $interviews = get_field('interviews');
-      if( ($catSlug === 'radios' || $catSlug === 'read') && $interviews ):
+      if( ($catSlug === 'read') && $interviews ):
     ?>
     <div class="interview-box">
       <?php
