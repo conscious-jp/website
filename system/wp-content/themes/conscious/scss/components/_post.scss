@@ -29,7 +29,6 @@
   position:relative;
 }
 .post__people {
-  /*float: left;*/
   position:absolute;
   width:100%;
   height: $people-thumb-size;
@@ -74,5 +73,12 @@
     width: 100%;
     height: auto;
     @include border-radius(50%);
+  }
+}
+
+@media screen and (max-width: $break-point-middle) {
+  .post__people {
+    position: inherit;
+    width: auto;
   }
 }
