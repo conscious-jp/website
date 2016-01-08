@@ -98,7 +98,7 @@
             'smallest' => 10,
             'largest' => 23,
             'unit' => 'px',
-            'number' => 20,
+            'number' => 30,
             'orderby' => 'count',
             'order' => 'DESC'
           )); ?>
