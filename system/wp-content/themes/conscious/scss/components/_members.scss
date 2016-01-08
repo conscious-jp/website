@@ -1,5 +1,5 @@
 .members {
-  padding: 20px 30px;
+  padding: 20px 0;
 }
 
 .members__list {
@@ -39,6 +39,17 @@
 .members__name {
   font-size: 18px;
   margin: 10px 0 0 0;
+}
+
+.members__title {
+  padding: 8px 10px;
+  font-family: $sans-title-font;
+  letter-spacing: .05em;
+  font-size: 21px;
+  text-align: center;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 40px;
 }
 
 @media screen and (max-width: $break-point-xsmall) {
