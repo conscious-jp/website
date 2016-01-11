@@ -99,7 +99,6 @@
               'orderby' => 'count',
               'order' => 'DESC'
             ));
-            var_dump($tags);
             $num = 0;
             $limit = 30;
             $result_tag = array();
@@ -121,7 +120,6 @@
         </div>
       </dd>
     </dl>
-
 
     <div class="search-bar clearfix">
         <form method="get" action="<?php echo home_url('/'); ?>">
