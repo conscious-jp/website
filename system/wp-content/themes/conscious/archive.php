@@ -17,7 +17,7 @@ get_header(); ?>
             <?php
                 $cats = get_categories(array(
                   'parent' => $archiveCat->term_id,
-                  'orderby' => 'order'
+                  'orderby' => 'term_order'
                 ));
                 foreach($cats as $cat):
                     $catThumb = get_field('cat_thumb', 'category'.'_'.$cat->term_id);
