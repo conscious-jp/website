@@ -99,6 +99,7 @@
               'orderby' => 'count',
               'order' => 'DESC'
             ));
+            var_dump($tags);
             $num = 0;
             $limit = 30;
             $result_tag = array();
