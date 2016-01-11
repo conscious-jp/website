@@ -24,7 +24,6 @@ $peopleParents = get_terms('people', array(
       $excludeID = array(
         get_term_by('slug', 'honda', 'people')->term_id,
         get_term_by('slug', 'genki', 'people')->term_id,
-        get_term_by('slug', 'qmoto', 'people')->term_id,
         get_term_by('slug', 'miyamoto', 'people')->term_id,
         get_term_by('slug', 'ariup', 'people')->term_id,
       );
