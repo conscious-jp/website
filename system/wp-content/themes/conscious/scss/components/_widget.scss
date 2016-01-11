@@ -282,3 +282,10 @@ Ad
     display: block;
   }
 }
+@media screen and (max-width: $break-point-small) {
+  .g-ad {
+    iframe {
+      height: 250px;
+    }
+  }
+}
