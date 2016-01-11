@@ -1,12 +1,28 @@
 <div class="sidebar">
 
-    <div class="org-banner">
-      <?php
-        $org_banners = get_field('org_banner', 'option');
-        $banner_key = array_rand($org_banners, 1);
-        $banner = $org_banners[$banner_key];
-      ?>
-      <a href="<?php echo $banner['banner_url']; ?>" target="_blank" class="org-bnr-link" title="<?php echo $banner['banner_title']; ?>"><img src="<?php echo $banner['banner_desktop_img']; ?>"></a>
+    <div class="g-ad-wrap">
+        <div class="g-ad">
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- sidebar1 -->
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:300px;height:250px"
+               data-ad-client="ca-pub-6309908964254814"
+               data-ad-slot="3556783283"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        <div class="g-ad">
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- sidebar2 -->
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:300px;height:250px"
+               data-ad-client="ca-pub-6309908964254814"
+               data-ad-slot="7398226885"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
     </div>
 
     <?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
@@ -118,28 +134,14 @@
         </div>
         </form>
     </div>
-    <div class="g-ad-wrap">
-        <div class="g-ad">
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- sidebar1 -->
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:300px;height:250px"
-               data-ad-client="ca-pub-6309908964254814"
-               data-ad-slot="3556783283"></ins>
-          <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-        <div class="g-ad">
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- sidebar2 -->
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:300px;height:250px"
-               data-ad-client="ca-pub-6309908964254814"
-               data-ad-slot="7398226885"></ins>
-          <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
+
+    <div class="org-banner">
+      <?php
+        $org_banners = get_field('org_banner', 'option');
+        $banner_key = array_rand($org_banners, 1);
+        $banner = $org_banners[$banner_key];
+      ?>
+      <a href="<?php echo $banner['banner_url']; ?>" target="_blank" class="org-bnr-link" title="<?php echo $banner['banner_title']; ?>"><img src="<?php echo $banner['banner_desktop_img']; ?>"></a>
     </div>
+    
 </div>

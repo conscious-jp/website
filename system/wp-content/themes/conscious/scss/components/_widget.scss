@@ -1,5 +1,5 @@
 .widget {
-  margin: 0 0 $gutter-size 0;
+  margin: $gutter-size 0 0 0;
   background-color: $white;
   border-color: $black;
   border-style: solid;
@@ -117,6 +117,9 @@ $post-thumb: 80px;
 /*
 Search
 */
+.search-bar {
+  margin-top: $gutter-size;
+}
 $searchHeight: 46px;
 .search-bar__input {
   margin-right: 60px;
@@ -165,6 +168,9 @@ Ad
 .g-ad {
   margin-top: $gutter-size;
   line-height: 0;
+  &:first-child {
+    margin-top: 0;
+  }
 }
 
 .people-ranking {
@@ -265,7 +271,9 @@ Ad
 }
 @media screen and (max-width: $break-point-middle) {
   .widget {
+    margin-top: 0;
     margin-bottom: 0;
+    border-bottom: none;
   }
   .widget__head {
     background-color: $black;
@@ -274,9 +282,10 @@ Ad
     color: $white;
   }
   .search-bar {
-    padding: $gutter-res-size;
+    padding: 15px 15px 0 15px;
     background-color: $white;
-    border-bottom: 1px solid $black;
+    margin-top: 0;
+    border-top: 1px solid $black;
   }
   .g-ad {
     display: block;

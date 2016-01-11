@@ -3,7 +3,7 @@
   width: $sidebar-width;
 }
 .org-banner {
-  margin: 0 0 20px 0;
+  margin: $gutter-size 0 0 0;
   text-align: center;
   line-height: 0;
 }
@@ -23,7 +23,6 @@
   .org-banner {
     padding: 20px 0;
     margin: 0;
-    border-top: 1px solid #000;
   }
 }
 @media screen and (max-width: $break-point-middle) {
