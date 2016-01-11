@@ -6,7 +6,7 @@ get_header();
 
 $peopleParents = get_terms('people', array(
   'hide_empty' => false,
-  'orderby' => 'order',
+  'orderby' => 'term_order',
   'parent' => 0
 ));
 ?>
@@ -30,7 +30,7 @@ $peopleParents = get_terms('people', array(
 
       $peoples = get_terms('people', array(
         'hide_empty' => false,
-        'orderby' => 'order',
+        'orderby' => 'term_order',
         'parent' => $parents->term_id,
         'exclude' => $excludeID
       ));
