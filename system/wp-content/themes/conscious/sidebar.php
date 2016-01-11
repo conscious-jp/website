@@ -94,17 +94,33 @@
       </dt>
       <dd class="widget__body">
         <div class="tagcloud">
-          <?php wp_tag_cloud(array(
-            'smallest' => 10,
-            'largest' => 23,
-            'unit' => 'px',
-            'number' => 30,
-            'orderby' => 'count',
-            'order' => 'DESC'
-          )); ?>
+          <?php
+            $tags = get_terms('post_tag', array(
+              'orderby' => 'count',
+              'order' => 'DESC'
+            ));
+            $num = 0;
+            $limit = 30;
+            $result_tag = array();
+            foreach($tags as $tag) {
+              if($num < $limit) {
+                array_push($result_tag, $tag);
+              }
+              $num = $num + 1;
+            }
+            $tagcloud = wp_generate_tag_cloud($result_tag, array(
+              'smallest' => 10,
+              'largest' => 23,
+              'unit' => 'px',
+              'orderby' => 'count',
+              'order' => 'DESC'
+            ));
+            echo $tagcloud;
+          ?>
         </div>
       </dd>
     </dl>
+
 
     <div class="search-bar clearfix">
         <form method="get" action="<?php echo home_url('/'); ?>">
