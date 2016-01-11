@@ -95,27 +95,14 @@
       <dd class="widget__body">
         <div class="tagcloud">
           <?php
-            $tags = get_terms('post_tag', array(
-              'orderby' => 'count',
-              'order' => 'DESC'
-            ));
-            $num = 0;
-            $limit = 30;
-            $result_tag = array();
-            foreach($tags as $tag) {
-              if($num < $limit) {
-                array_push($result_tag, $tag);
-              }
-              $num = $num + 1;
-            }
-            $tagcloud = wp_generate_tag_cloud($result_tag, array(
+            wp_tag_cloud(array(
               'smallest' => 10,
               'largest' => 23,
               'unit' => 'px',
+              'number' => 30,
               'orderby' => 'count',
               'order' => 'DESC'
             ));
-            echo $tagcloud;
           ?>
         </div>
       </dd>
