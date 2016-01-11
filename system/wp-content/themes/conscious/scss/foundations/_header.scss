@@ -3,6 +3,8 @@
  */
 .header {
   background: $base-color;
+  position: relative;
+  padding-bottom: $nav-height;
 }
 .header__top {
   height: $header-height;
@@ -81,6 +83,10 @@
 .gnav {
   background: $black;
   color: $white;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
   .gnav__container {
     list-style: none;
     padding: 0;
@@ -93,7 +99,7 @@
     left: 0;
     top: 0;
     z-index: 30;
-    width: 100%;
+    bottom: inherit;
   }
 }
 .gnav__list {
@@ -176,6 +182,9 @@
   }
 }
 @media screen and (max-width: $break-point-middle) {
+  .header {
+    padding-bottom: 0;
+  }
   .header__top {
     background: $base-color;
     height: $mb-header-height;
@@ -240,6 +249,7 @@
     z-index: 20;
     width: 100%;
     top: -100% !important;
+    bottom: inherit;
     opacity: 0;
     @include transition(.3s all ease-out);
   }
