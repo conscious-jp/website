@@ -1,7 +1,6 @@
 .post-detail {
   background: $white;
-  border-top: 1px solid $black;
-  border-bottom: 1px solid $black;
+  border: 1px solid $border-color;
   padding: 25px;
   .post__meta {
     margin-bottom: 15px;
@@ -176,6 +175,10 @@ iframe {
 
 
 @media screen and (max-width: $break-point-middle) {
+  .post-detail {
+    border: none;
+    border-bottom: 1px solid $border-color;
+  }
   .bf-link {
     padding: 20px 20px 0 20px;
   }
