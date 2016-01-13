@@ -264,12 +264,20 @@ Ad
     }
   }
   a {
-    font-size: 17px;
-    padding: 10px 16px 10px 40px;
+    font-size: 18px;
+    padding: 10px 16px 10px 45px;
     height: auto;
     line-height: 1.5;
     text-align: left;
     position: relative;
+    background-color: $black;
+    color: $white;
+    font-family: $sans-title-font;
+    letter-spacing: .05em;
+    &:hover {
+      background-color: $black;
+      color: $base-color;
+    }
   }
   .fa {
     margin-right: 10px;
@@ -317,6 +325,11 @@ Ad
   }
   .g-ad {
     display: block;
+  }
+  .pickup-tag {
+    a {
+      background-color: #666;
+    }
   }
 }
 @media screen and (max-width: $break-point-small) {
