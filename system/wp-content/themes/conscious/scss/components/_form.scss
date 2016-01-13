@@ -37,6 +37,9 @@ input[type='submit'] {
     color: $base-color;
     text-decoration: none;
   }
+  &.full {
+    display: block;
+  }
 }
 
 @media screen and (max-width: $break-point-small) {
