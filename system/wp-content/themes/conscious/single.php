@@ -41,7 +41,7 @@ get_header(); ?>
     <p class="post__img-via">
       参照元：
       <?php if($img_via_url): ?>
-      <a href="<?php echo $img_via_url; ?>"><?php echo $img_via_txt; ?></a>
+      <a href="<?php echo $img_via_url; ?>" target="_blank"><?php echo $img_via_txt; ?></a>
       <?php else: ?>
       <?php echo $img_via_txt; ?>
       <?php endif; ?>
