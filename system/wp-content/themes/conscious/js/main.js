@@ -52,13 +52,13 @@
     setPostPermalink: function () {
       $('.js-post-link').on('click', function(e){
         e.preventDefault();
-        $link = $(this).attr('data-link');
+        var $link = $(this).attr('data-link');
         location.href = $link;
         return false;
       });
       $('.js-people-link, .js-cat-link').on('click', function(e){
         e.preventDefault();
-        $link = $(this).attr('href');
+        var $link = $(this).attr('href');
         location.href = $link;
         return false;
       });
