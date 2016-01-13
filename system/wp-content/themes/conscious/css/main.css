@@ -1024,7 +1024,7 @@ input[type='submit'] {
   min-height: 200px;
   border-bottom: none; }
   .post-list--feature:hover .post-list__smoke {
-    background-color: rgba(0, 0, 0, 0.2); }
+    background-color: rgba(0, 0, 0, 0.7); }
   .post-list--feature .post-list__thumb {
     float: none;
     width: 100%; }
@@ -1061,7 +1061,7 @@ input[type='submit'] {
   width: 100%;
   height: 100%;
   transition: .2s all ease-out;
-  background-image: rgba(0, 0, 0, 0.6); }
+  background-color: rgba(0, 0, 0, 0.6); }
 
 .post-list__fwrap {
   position: relative;

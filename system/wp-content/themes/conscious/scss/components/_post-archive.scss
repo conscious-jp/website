@@ -82,7 +82,7 @@ $post-list-thumb: 240px;
   border-bottom: none;
   &:hover {
     .post-list__smoke {
-      background-color: rgba(0,0,0,.2);
+      background-color: rgba(0,0,0,.7);
     }
   }
   .post-list__thumb {
@@ -129,7 +129,7 @@ $post-list-thumb: 240px;
   width: 100%;
   height: 100%;
   transition: .2s all ease-out;
-  background-image: rgba(0,0,0,.6);
+  background-color: rgba(0,0,0,.6);
 }
 
 .post-list__fwrap {
