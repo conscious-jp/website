@@ -1,11 +1,19 @@
 (function($) {
   'use strict';
 
-  var $body     = $('body');
-  var $navPos   = 0;
-  var $mbWidth  = 780;
-  var $timer    = false;
-  var $agent    = navigator.userAgent;
+  var $body              = $('body');
+  var $navPos            = 0;
+  var $mbWidth           = 780;
+  var $timer             = false;
+  var $agent             = navigator.userAgent;
+  var $sidebarH          = 0;
+  var $mainH             = 0;
+  var $headerH           = 0;
+  var $footerH           = 0;
+  var $windowH           = $(window).height();
+  var $pageH             = $('body').height();
+  var $fixedPoint        = 0;
+  var $scrollBottomPoint = 0;
 
   var _conscious = {
     // Initialize
@@ -106,6 +114,51 @@
       }else{
         $('.js-gnav').removeClass('is-fixed');
       }
+    },
+
+    getMainHeight: function () {
+      var $height = $('.js-main').outerHeight();
+      return $height;
+    },
+
+    getSidebarHeight: function () {
+      var $height = $('.js-sidebar').outerHeight();
+      return $height;
+    },
+
+    getHeaderHeight: function () {
+      var $height = $('.js-header').outerHeight();
+      return $height;
+    },
+
+    getFooterHeight: function () {
+      var $height = $('.js-footer').outerHeight();
+      return $height;
+    },
+
+    fixedSidebar: function () {
+      var $scrollTop = $(window).scrollTop();
+      $sidebarH = this.getSidebarHeight();
+      $mainH = this.getMainHeight();
+      $headerH = this.getHeaderHeight();
+      $footerH = this.getFooterHeight();
+      $fixedPoint = $headerH + $sidebarH - $windowH + 60;
+      $scrollBottomPoint = $headerH + $mainH - $windowH + 60;
+
+      if ($(window).width() > 980 && $mainH > $sidebarH) {
+        if ($scrollTop > $fixedPoint) {
+          $('.js-sidebar').addClass('is-fixed');
+        } else {
+          $('.js-sidebar').removeClass('is-fixed');
+        }
+
+        if ($scrollTop > $scrollBottomPoint) {
+          $('.js-sidebar').removeClass('is-fixed');
+          $('.js-sidebar').addClass('is-bottomed');
+        } else {
+          $('.js-sidebar').removeClass('is-bottomed');
+        }
+      }
     }
   }
 
@@ -117,16 +170,18 @@
 
     'resize': function () {
       if ($timer !== false) {
-        clearTimeout(timer);
+        clearTimeout($timer);
       }
-      timer = setTimeout(function() {
+      $timer = setTimeout(function() {
         _conscious.setGlobalNaviPosition();
         _conscious.setGlobalNavigation();
+        _conscious.fixedSidebar();
       }, 100);
     },
 
     'scroll': function () {
       _conscious.setGlobalNavigation();
+      _conscious.fixedSidebar();
     }
   });
 

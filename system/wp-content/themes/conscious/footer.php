@@ -4,10 +4,11 @@
  */
 ?>
 </div>
+</div>
 <?php get_sidebar(); ?>
 </div>
 
-<footer class="footer">
+<footer class="footer js-footer">
     <div class="container clearfix">
         <div class="footer__col">
             <h2 class="footer__title">コンテンツ</h2>

@@ -1,6 +1,18 @@
 .sidebar {
   float: right;
   width: $sidebar-width;
+  &.is-fixed {
+    position: fixed;
+    left: 50%;
+    margin-left: ($content-width / 2) - $sidebar-width;
+    bottom: 30px;
+  }
+  &.is-bottomed {
+    position: absolute;
+    left: 50%;
+    margin-left: ($content-width / 2) - $sidebar-width;
+    bottom: 0;
+  }
 }
 .org-banner {
   margin: $gutter-size 0 0 0;
@@ -9,13 +21,26 @@
 }
 @media screen and (max-width: $break-point-full) {
   .sidebar {
-    float: none;
-    display: table-cell;
-    vertical-align: top;
+    float: right;
+    margin-left: -$sidebar-width;
+    &.is-fixed {
+      left: inherit;
+      right: $gutter-size;
+      margin-left: 0;
+    }
+    &.is-bottomed {
+      left: inherit;
+      right: $gutter-size;
+      margin-left: 0;
+      bottom: 0;
+    }
   }
 }
 @media screen and (max-width: $break-point-large) {
   .sidebar {
+    position: static !important;
+    float: none;
+    margin-left: 0;
     display: block;
     padding-top: $gutter-res-size;
     width: auto;

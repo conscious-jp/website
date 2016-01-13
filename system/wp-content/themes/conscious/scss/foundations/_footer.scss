@@ -67,11 +67,14 @@
 }
 @media screen and (max-width: $break-point-full) {
   .footer {
-    margin-top: $gutter-res-size;
+    margin-top: $gutter-size;
     padding: $gutter-res-size;
   }
 }
 @media screen and (max-width: $break-point-large) {
+  .footer {
+    margin-top: $gutter-res-size;
+  }
   .footer__col {
     width: 49%;
     margin-left: 2%;

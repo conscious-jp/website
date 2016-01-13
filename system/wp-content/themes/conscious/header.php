@@ -25,7 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div id="fb-root"></div>
 
-<header class="header">
+<header class="header js-header">
     <div class="header__top js-header-top container">
         <button class="h-menu js-mobile-menu"><i class="fa fa-bars"></i></button>
         <button class="h-mb-social js-mobile-social"><i class="fa fa-share-alt"></i></button>
@@ -105,5 +105,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </header>
 
 <div class="contents container clearfix">
-    <div class="main">
-      <?php get_template_part('includes/breadcrumbs'); ?>
+    <div class="main js-main">
+        <div class="main-inner">
+            <?php get_template_part('includes/breadcrumbs'); ?>

@@ -5,7 +5,7 @@
     array_push($exclude_tags, $tag['tag_id']);
   };
 ?>
-<div class="sidebar">
+<div class="sidebar js-sidebar">
 
     <div class="g-ad-wrap">
         <div class="g-ad">
