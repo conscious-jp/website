@@ -172,7 +172,7 @@ $nextCatPost = new WP_Query(array(
 
 <div class="post-archive cat-post">
   <div class="post-archive__head">
-      <h2 class="post-archive__title"><?php echo $childCatName; ?></h2>
+      <h2 class="post-archive__title sub"><?php echo $childCatName; ?></h2>
   </div>
   <ul class="cat-post-link clearfix">
     <li class="prev">

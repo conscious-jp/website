@@ -15,8 +15,7 @@ body {
   font-size: $base-font-size;
   font-family: $base-font-family;
   line-height: $base-line-height;
- // background-color: $bg-color;
- // background-image: url("../img/bg.png");
+  background-color: $bg-color;
   background-position: left top;
   background-repeat: repeat;
   background-size: 10px 10px;
@@ -58,11 +57,12 @@ a {
   }
 }
 
+/*
 .thumb {
   border: 1px solid $black;
   background-color: $white;
   padding: 1px;
-}
+} */
 
 
 .clearfix {

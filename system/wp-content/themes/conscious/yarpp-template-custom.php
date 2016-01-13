@@ -5,7 +5,7 @@ YARPP Template: Custom
 ?>
 <div class="post-archive">
     <div class="post-archive__head">
-        <h2 class="post-archive__title">関連記事</h2>
+        <h2 class="post-archive__title sub">関連記事</h2>
     </div>
     <?php if (have_posts()):?>
     <ul class="related clearfix">

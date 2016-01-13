@@ -1,22 +1,18 @@
 .widget {
   margin: $gutter-size 0 0 0;
   background-color: $white;
-  border-color: $black;
-  border-style: solid;
-  border-top-width: 0;
-  border-bottom-width: 2px;
-  border-left-width: 0;
-  border-right-width: 0;
+  border: 1px solid $border-color;
 }
 .widget__head {
-  border-bottom: 1px solid #000;
-  padding: 4px 10px;
+  border-bottom: 1px solid $border-color;
+  padding: 6px 15px;
 }
 .widget__title {
   margin: 0;
   font-family: $sans-title-font;
   color: $text-color;
-  font-size: 26px;
+  font-size: 24px;
+  letter-spacing: .05em;
 }
 .widget__body {
   margin: 0;
@@ -29,7 +25,7 @@
   list-style: none;
 }
 .widget-post__list {
-  border-bottom: 1px dashed #8c8c8c;
+  border-bottom: 1px solid $border-color;
   a {
     display: block;
     padding: 15px;
@@ -42,10 +38,6 @@
 .widget-post--ranking {
   .widget-post__thumb {
     position: relative;
-    img {
-      border: 1px solid $black;
-      padding: 1px;
-    }
     &:after {
       $rank-size: 24px;
       content: '1';
@@ -205,7 +197,7 @@ Ad
     }
   }
   li {
-    border-bottom: 1px dashed #8c8c8c;
+    border-bottom: 1px solid $border-color;
     &:last-child {
       border-bottom: none;
     }
@@ -220,32 +212,34 @@ Ad
 }
 
 .side-tab {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $border-color;
   list-style: none;
   margin: 0;
   padding: 0;
-  letter-spacing: -.4em;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
   li {
-    display: inline-block;
-    letter-spacing: normal;
-    width: 33.33%;
     text-align: center;
-    border-right: 1px solid #000;
+    border-right: 1px solid $border-color;
+    width: 34%;
     &:last-child {
       border-right: none;
     }
     &.current {
       a {
-        background-color: #414141;
-        color: $base-color;
+        background-color: #ddd;
+        color: $black;
       }
     }
   }
   a {
-    color: #333;
+    color: $black;
     display: block;
     padding: 10px 0;
     text-decoration: none;
+    font-family: $sans-bold-font;
+    letter-spacing: .05em;
     &:hover {
       background-color: #f1f1f1;
     }
@@ -266,12 +260,20 @@ Ad
     }
   }
   a {
-    font-size: 17px;
-    padding: 10px 16px 10px 40px;
+    font-size: 18px;
+    padding: 10px 16px 10px 45px;
     height: auto;
     line-height: 1.5;
     text-align: left;
     position: relative;
+    background-color: $black;
+    color: $white;
+    font-family: $sans-title-font;
+    letter-spacing: .05em;
+    &:hover {
+      background-color: $black;
+      color: $base-color;
+    }
   }
   .fa {
     margin-right: 10px;
@@ -303,7 +305,7 @@ Ad
   .widget {
     margin-top: 0;
     margin-bottom: 0;
-    border-bottom: none;
+    border: none;
   }
   .widget__head {
     background-color: $black;
@@ -315,10 +317,15 @@ Ad
     padding: 15px 15px 0 15px;
     background-color: $white;
     margin-top: 0;
-    border-top: 1px solid $black;
+    border-top: 1px solid $border-color;
   }
   .g-ad {
     display: block;
+  }
+  .pickup-tag {
+    a {
+      background-color: #666;
+    }
   }
 }
 @media screen and (max-width: $break-point-small) {

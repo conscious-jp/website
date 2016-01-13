@@ -6,9 +6,10 @@
   float: left;
 }
 .breadcrumbs {
+  background-color: $white;
+  border: 1px solid $border-color;
   margin-bottom: 15px;
   padding: 10px 15px;
-  background-color: #f6f6f6;
   border-radius: 3px;
   .fa {
     padding: 0 5px;
