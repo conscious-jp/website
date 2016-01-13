@@ -7,12 +7,11 @@ textarea {
   padding: 6px 10px;
   background: #f9f9f9;
   -webkit-appearance: none;
-  @include border-radius(0);
-  @include box-shadow(0 1px 3px rgba(0,0,0,.2) inset);
-  @include box-sizing(border-box);
+  border-radius: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
   &:focus {
     background: $white;
-    @include box-shadow(none);
+    box-shadow: none;
   }
   &.full {
     width: 100%;

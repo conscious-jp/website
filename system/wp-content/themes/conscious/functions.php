@@ -42,7 +42,7 @@ require get_template_directory() . '/class/PostWidget.php';
 function conscious_scripts() {
     wp_deregister_script( 'jquery' );
     wp_enqueue_style('font-awesome', get_template_directory_uri() . '/vendor/fontawesome/css/font-awesome.min.css');
-    wp_enqueue_style('conscious-style', get_template_directory_uri() . '/css/main.css');
+    wp_enqueue_style('conscious-style', get_template_directory_uri() . '/css/main.min.css');
     wp_enqueue_script('jquery', get_template_directory_uri() . '/vendor/jquery/dist/jquery.min.js');
     wp_enqueue_script('inview', get_template_directory_uri() . '/vendor/jquery/src/jquery.inview.min.js');
     wp_enqueue_script('font-plus', '//webfont.fontplus.jp/accessor/script/fontplus.js?KoHlmZp2zZE%3D&t=0&aa=1');

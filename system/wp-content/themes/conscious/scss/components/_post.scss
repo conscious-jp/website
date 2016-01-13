@@ -58,13 +58,13 @@
   width: $people-thumb-size;
   line-height: 0;
   margin: 0 5px;
-  @include border-radius(50%);
+  border-radius: 50%;
   &:first-child {margin-left: 0;}
   &:last-child {margin-right: 0;}
   a {
     display: block;
     border: 1px solid #ddd;
-    @include border-radius(50%);
+    border-radius: 50%;
     &:hover {
       border: 1px solid $base-color;
     }
@@ -72,7 +72,7 @@
   img {
     width: 100%;
     height: auto;
-    @include border-radius(50%);
+    border-radius: 50%;
   }
 }
 

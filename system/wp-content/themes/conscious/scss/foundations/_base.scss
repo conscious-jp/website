@@ -1,9 +1,9 @@
 * {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 }
 *:before,
 *:after {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 }
 
 html {
@@ -51,7 +51,7 @@ a {
   color: $link-color;
   font-weight: bold;
   text-decoration: none;
-  @include transition(.3s all linear);
+  transition: .3s all linear;
   &:hover {
     text-decoration: underline;
   }

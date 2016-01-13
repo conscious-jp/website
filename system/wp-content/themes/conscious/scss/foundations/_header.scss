@@ -38,7 +38,7 @@
   outline: 0;
   display: none;
   font-size: 16px;
-  @include border-radius(4px);
+  border-radius: 4px;
 }
 .h-menu {
   left: 9px;
@@ -70,7 +70,7 @@
     background: $black;
     color: $white;
     font-size: 20px;
-    @include border-radius(50%);
+    border-radius: 50%;
     &:hover {
       color: $base-color;
     }
@@ -145,7 +145,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      @include transition(.2s all ease-out);
+      transition: .2s all ease-out;
     }
     &:hover {
       color: $base-color;
@@ -251,7 +251,7 @@
     top: -100% !important;
     bottom: inherit;
     opacity: 0;
-    @include transition(.3s all ease-out);
+    transition: .3s all ease-out;
   }
   .gnav__list {
     width: 50%;

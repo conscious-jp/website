@@ -32,8 +32,8 @@
     width: 100%;
     height: auto;
     border: 1px solid #ddd;
-    @include transition(.2s all ease-out);
-    @include border-radius(50%);
+    transition: .2s all ease-out;
+    border-radius: 50%;
   }
 }
 .members__name {
