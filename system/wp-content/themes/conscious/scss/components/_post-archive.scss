@@ -1,5 +1,6 @@
 .post-archive {
   background-color: $white;
+  border: 1px solid $border-color;
   .post-list:last-child {
     border-bottom: none;
   }
@@ -8,11 +9,11 @@
   }
 }
 .post-archive__head {
-  border-bottom: 1px solid $black;
-  padding: 6px 15px;
+  border-bottom: 1px solid $border-color;
+  padding: 8px 15px;
 }
 .post-archive__title {
-  color: $text-color;
+  color: $black;
   margin: 0;
   font-size: 42px;
   font-family: $sans-title-font;
@@ -21,7 +22,7 @@
 }
 .post-list {
 	position:relative;
-  border-bottom: 1px dashed #8c8c8c;
+  border-bottom: 1px solid $border-color;
   padding: 20px;
   @include transition(.2s all ease-out);
   &:hover {
@@ -75,6 +76,7 @@ $post-list-thumb: 240px;
   background-size: cover;
   background-position: center top;
   min-height: 200px;
+  border-bottom: none;
   &:hover {
     .post-list__smoke {
       background-color: rgba(0,0,0,.2);
@@ -259,8 +261,13 @@ $post-list-thumb: 240px;
 
 
 @media screen and (max-width: $break-point-middle) {
+  .post-archive {
+    border: none;
+    border-bottom: 1px solid $border-color;
+  }
   .post-archive__head {
     background: $black;
+    border-bottom: none;
   }
   .post-archive__title {
     font-size: 26px;
