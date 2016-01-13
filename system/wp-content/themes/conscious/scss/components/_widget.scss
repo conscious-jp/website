@@ -267,12 +267,18 @@ Ad
   }
   a {
     font-size: 17px;
-    padding: 10px 12px;
+    padding: 10px 16px 10px 40px;
     height: auto;
     line-height: 1.5;
+    text-align: left;
+    position: relative;
   }
   .fa {
     margin-right: 10px;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    margin-top: -9px
   }
 }
 

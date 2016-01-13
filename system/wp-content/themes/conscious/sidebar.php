@@ -4,7 +4,6 @@
   foreach ($pickup_tags as $tag) {
     array_push($exclude_tags, $tag['tag_id']);
   };
-  var_dump($exclude_tags);
 ?>
 <div class="sidebar">
 
