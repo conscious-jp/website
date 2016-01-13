@@ -69,7 +69,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <?php endif; ?>
-<script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/main.min.js"></script>
 
 <?php wp_footer(); ?>
 
