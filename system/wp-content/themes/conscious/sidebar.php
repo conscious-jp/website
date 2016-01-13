@@ -1,3 +1,11 @@
+<?php
+  $pickup_tags = get_field('pickup_tags', 'option');
+  $exclude_tags = array();
+  foreach ($pickup_tags as $tag) {
+    array_push($exclude_tags, $tag['tag_id']);
+  };
+  var_dump($exclude_tags);
+?>
 <div class="sidebar">
 
     <div class="g-ad-wrap">
@@ -106,6 +114,22 @@
 
     <dl class="widget">
       <dt class="widget__head">
+        <h2 class="widget__title">ピックアップキーワード</h2>
+      </dt>
+      <dd class="widget__body">
+        <ul class="pickup-tag">
+          <?php
+            foreach ($pickup_tags as $ptag):
+            $tag_link = get_term_link($ptag['tag_id'], 'post_tag');
+          ?>
+          <li><a href="<?php echo $tag_link; ?>" class="btn full"><i class="fa <?php echo $ptag['tag_icon']; ?>"></i><?php echo $ptag['tag_name']; ?></a></li>
+          <?php endforeach; ?>
+        </ul>
+      </dd>
+    </dl>
+
+    <dl class="widget">
+      <dt class="widget__head">
         <h2 class="widget__title">タグ</h2>
       </dt>
       <dd class="widget__body">
@@ -117,7 +141,8 @@
               'unit' => 'px',
               'number' => 30,
               'orderby' => 'count',
-              'order' => 'DESC'
+              'order' => 'DESC',
+              'exclude' => $exclude_tags
             ));
           ?>
         </div>
@@ -143,5 +168,5 @@
       ?>
       <a href="<?php echo $banner['banner_url']; ?>" target="_blank" class="org-bnr-link" title="<?php echo $banner['banner_title']; ?>"><img src="<?php echo $banner['banner_desktop_img']; ?>"></a>
     </div>
-    
+
 </div>
