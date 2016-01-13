@@ -1,5 +1,6 @@
 .contents {
   padding-top: $gutter-size;
+  position: relative;
 }
 .main {
   width: $content-width - ($sidebar-width + $gutter-size);
@@ -17,29 +18,31 @@
 }
 @media screen and (max-width: $break-point-full) {
   .contents {
-    padding-top: $gutter-res-size;
-    padding-left: $gutter-res-size;
-    padding-right: $gutter-res-size;
-    display: table;
+    padding-top: $gutter-size;
+    padding-left: $gutter-size;
+    padding-right: $gutter-size;
     width: 100%;
   }
   .main {
-    width: auto;
-    float: none;
-    padding-right: $gutter-res-size;
-    display: table-cell;
-    vertical-align: top;
+    width: 100%;
+    float: left;
   }
-  .breadcrumbs {
-    padding-left: $gutter-res-size;
-    padding-right: $gutter-res-size;
-    margin-bottom: -5px;
+  .main-inner {
+    margin-right: $sidebar-width + $gutter-size;
   }
 }
 @media screen and (max-width: $break-point-large) {
   .main {
     display: block;
     padding-right: 0;
+  }
+  .contents {
+    padding-top: $gutter-res-size;
+    padding-left: $gutter-res-size;
+    padding-right: $gutter-res-size;
+  }
+  .main-inner {
+    margin-right: 0;
   }
 }
 @media screen and (max-width: $break-point-middle) {
