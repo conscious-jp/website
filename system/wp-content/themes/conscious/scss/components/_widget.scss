@@ -38,10 +38,6 @@
 .widget-post--ranking {
   .widget-post__thumb {
     position: relative;
-    img {
-      border: 1px solid $black;
-      padding: 1px;
-    }
     &:after {
       $rank-size: 24px;
       content: '1';
