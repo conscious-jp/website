@@ -113,7 +113,7 @@
 
     <dl class="widget">
       <dt class="widget__head">
-        <h2 class="widget__title">ピックアップキーワード</h2>
+        <h2 class="widget__title">まずはココから</h2>
       </dt>
       <dd class="widget__body">
         <ul class="pickup-tag">
@@ -129,7 +129,7 @@
 
     <dl class="widget">
       <dt class="widget__head">
-        <h2 class="widget__title">タグ</h2>
+        <h2 class="widget__title">人気のタグ</h2>
       </dt>
       <dd class="widget__body">
         <div class="tagcloud">
