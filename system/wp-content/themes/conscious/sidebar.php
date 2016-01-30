@@ -10,22 +10,11 @@
     <div class="g-ad-wrap">
         <div class="g-ad">
           <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- sidebar1 -->
+          <!-- Sidebar -->
           <ins class="adsbygoogle"
                style="display:inline-block;width:300px;height:250px"
-               data-ad-client="ca-pub-6309908964254814"
-               data-ad-slot="3556783283"></ins>
-          <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-        <div class="g-ad">
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <!-- sidebar2 -->
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:300px;height:250px"
-               data-ad-client="ca-pub-6309908964254814"
-               data-ad-slot="7398226885"></ins>
+               data-ad-client="ca-pub-6899919366986400"
+               data-ad-slot="3783465378"></ins>
           <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
           </script>
