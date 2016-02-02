@@ -619,7 +619,7 @@ strong {
     height: auto;
     margin: 0;
     display: table-cell;
-    width: 25%;
+    width: 20%;
     border-right: 1px solid #333333; }
     .h-share__list:last-child {
       border-right: none; }
