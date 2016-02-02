@@ -44,7 +44,7 @@ function conscious_scripts() {
     wp_enqueue_style('font-awesome', get_template_directory_uri() . '/vendor/fontawesome/css/font-awesome.min.css');
     wp_enqueue_style('conscious-style', get_template_directory_uri() . '/css/main.min.css');
     wp_enqueue_script('jquery', get_template_directory_uri() . '/vendor/jquery/dist/jquery.min.js');
-    wp_enqueue_script('inview', get_template_directory_uri() . '/vendor/jquery/src/jquery.inview.min.js');
+    wp_enqueue_script('inview', get_template_directory_uri() . '/vendor/protonet/jquery.inview/jquery.inview.min.js');
     wp_enqueue_script('font-plus', '//webfont.fontplus.jp/accessor/script/fontplus.js?KoHlmZp2zZE%3D&t=0&aa=1');
     wp_enqueue_style('google-font', '//fonts.googleapis.com/css?family=Lato:400,700,900');
 }
