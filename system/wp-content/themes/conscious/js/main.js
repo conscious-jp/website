@@ -92,9 +92,7 @@
     	}else{
     		$(".post-list>div").on('inview', function(event, isInView, visiblePartX, visiblePartY) {
     			if (isInView) {
-    				if (visiblePartY == 'top' || visiblePartY == 'bottom' || visiblePartY == 'both' ) {
-    					$(this).stop().animate({opacity: 1,marginTop:0}, 700);
-    				}
+            $(this).stop().animate({opacity: 1,marginTop:0}, 700);
     			}
     			else {
     				$(this).stop().animate({opacity: 0,marginTop:0}, 700);
