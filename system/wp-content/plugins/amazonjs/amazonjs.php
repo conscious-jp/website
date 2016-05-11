@@ -4,27 +4,28 @@
  Plugin URI: http://wordpress.org/extend/plugins/amazonjs/
  Description: Easy to use interface to add an amazon product to your post and display it by using jQuery template.
  Author: makoto_kw
- Version: 0.7.3
+ Version: 0.8
  Author URI: http://makotokw.com
  Requires at least: 3.3
- Tested up to: 3.9.2
+ Tested up to: 4.5
  License: GPLv2
  Text Domain: amazonjs
  Domain Path: /languages/
  */
-/* 
+/*
  AmazonJS depends on
    jQuery tmpl
-   PEAR Cache_Lite: Fabien MARTY <fab@php.net>
    PEAR Services_JSON: Michal Migurski <mike-json@teczno.com>
  */
 
-require_once dirname( __FILE__ ) . '/lib/Cache/Lite.php';
+// TODO: Fixed NoSilencedErrors.Discouraged
+// @codingStandardsIgnoreStart Generic.PHP.NoSilencedErrors.Discouraged
+
 require_once dirname( __FILE__ ) . '/lib/json.php';
 
 class Amazonjs
 {
-	const VERSION        = '0.7.3';
+	const VERSION        = '0.8';
 	const AWS_VERSION    = '2011-08-01';
 	const CACHE_LIFETIME = 86400;
 
@@ -43,8 +44,6 @@ class Amazonjs
 	public $media_type = 'amazonjs';
 	public $countries;
 	public $search_indexes;
-	public $cache;
-	public $cache_dir;
 	public $display_items = array();
 	public $simple_template;
 
@@ -126,26 +125,10 @@ class Amazonjs
 				'associateTagSuffix' => '-21',
 			),
 		);
-
-		//$this->cache_dir = dirname(__FILE__).DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
-		$wp_content_dir  = (defined( 'WP_CONTENT_DIR' ) && file_exists( WP_CONTENT_DIR )) ? WP_CONTENT_DIR : ABSPATH . 'wp-content';
-		$this->cache_dir = $wp_content_dir . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'amazonjs' . DIRECTORY_SEPARATOR;
-		if ( ! @is_dir( $this->cache_dir ) ) {
-			@mkdir( $this->cache_dir );
-		}
-		$this->cache = new Amazonjs_Cache_Lite(
-			array(
-				'cacheDir'               => $this->cache_dir,
-				'lifeTime'               => self::CACHE_LIFETIME,
-				'automaticSerialization' => true,
-			)
-		);
 	}
 
 	function clean() {
 		$this->delete_settings();
-		$this->cache->clean();
-		@rmdir( $this->cache_dir );
 	}
 
 	function init() {
@@ -179,7 +162,7 @@ class Amazonjs
 			}
 		}
 		foreach ( $this->setting_fields as $key => $field ) {
-			$label = ($field['type'] == 'checkbox') ? '' : $field['label'];
+			$label = ('checkbox' == $field['type']) ? '' : $field['label'];
 			add_settings_field(
 				$this->option_name . '_' . $key,
 				$label,
@@ -215,9 +198,9 @@ class Amazonjs
 	}
 
 	function wp_enqueue_scripts() {
-		wp_register_script( 'jqeury-tmpl', $this->url . '/components/js/jquery-tmpl/jquery.tmpl.min.js', array( 'jquery' ), '1.0.0pre', true );
+		wp_register_script( 'jquery-tmpl', $this->url . '/components/js/jquery-tmpl/jquery.tmpl.min.js', array( 'jquery' ), '1.0.0pre', true );
 
-		$depends = array( 'jqeury-tmpl' );
+		$depends = array( 'jquery-tmpl' );
 		if ( $this->settings['displayCustomerReview'] ) {
 			$depends[] = 'thickbox';
 		}
@@ -231,9 +214,8 @@ class Amazonjs
 		$country_codes = array();
 		$items         = array();
 		foreach ( $this->display_items as $country_code => $sub_items ) {
-			$locale_items = $this->fetch_items( $country_code, $sub_items );
-			foreach ( $locale_items as $asin => $item ) {
-				$items[$country_code . ':' . $asin] = $item;
+			foreach ( $this->fetch_items( $country_code, $sub_items ) as $asin => $item ) {
+				$items[ $country_code . ':' . $asin ] = $item;
 			}
 			$country_codes[] = $country_code;
 		}
@@ -252,14 +234,14 @@ class Amazonjs
 		foreach ( $this->countries as $code => $value ) {
 			if ( in_array( $code, $country_codes ) ) {
 				foreach ( array( 'linkTemplate' ) as $attr ) {
-					$region['Link' . $code] = $this->tmpl( $value[$attr], array( 't' => $this->settings['associateTag' . $code] ) );
+					$region[ 'Link' . $code ] = $this->tmpl( $value[ $attr ], array( 't' => $this->settings[ 'associateTag' . $code ] ) );
 				}
 			}
 		}
 
 		$amazonVars = array(
 			'thickboxUrl'             => $wpurl . '/wp-includes/js/thickbox/',
-			'regionTempalte'          => $region,
+			'regionTemplate'          => $region,
 			'resource'                => array(
 				'BookAuthor'          => __( 'Author', $this->text_domain ),
 				'BookPublicationDate' => __( 'PublicationDate', $this->text_domain ),
@@ -297,19 +279,24 @@ class Amazonjs
 		$this->setting_sections = array(
 			'api'        => array(
 				'label' => __( 'Product Advertising API settings', $this->text_domain ),
-				'add'   => 'add_api_setting_section' ),
+				'add'   => 'add_api_setting_section',
+			),
 			'associate'  => array(
 				'label' => __( 'Amazon Associates settings', $this->text_domain ),
-				'add'   => 'add_associate_setting_section' ),
+				'add'   => 'add_associate_setting_section',
+			),
 			'appearance' => array(
 				'label' => __( 'Appearance settings', $this->text_domain ),
-				'add'   => 'add_appearance_setting_section' ),
+				'add'   => 'add_appearance_setting_section',
+			),
 			'analytics'  => array(
 				'label' => __( 'Analytics settings', $this->text_domain ),
-				'add'   => 'add_analytics_setting_section' ),
+				'add'   => 'add_analytics_setting_section',
+			),
 			'customize'  => array(
 				'label' => __( 'Customize', $this->text_domain ),
-				'add'   => 'add_customize_setting_section' ),
+				'add'   => 'add_customize_setting_section',
+			),
 		);
 		// filed
 		$template_url         = get_bloginfo( 'template_url' );
@@ -330,7 +317,7 @@ class Amazonjs
 				'label'       => __( 'Display customer review', $this->text_domain ),
 				'type'        => 'checkbox',
 				'section'     => 'appearance',
-				'description' => __( "AmazonJS will display customer review by using WordPress's Thickbox.", $this->text_domain )
+				'description' => __( "AmazonJS will display customer review by using WordPress's Thickbox.", $this->text_domain ),
 			),
 			'supportDisabledJavascript' => array(
 				'label'       => __( 'Display official widget when disabled javascript in web browser', $this->text_domain ),
@@ -369,7 +356,7 @@ class Amazonjs
 			),
 		);
 		foreach ( $this->countries as $key => $value ) {
-			$this->setting_fields['associateTag' . $key] = array(
+			$this->setting_fields[ 'associateTag' . $key ] = array(
 				'label'       => __( $value['domain'], $this->text_domain ),
 				'type'        => 'text',
 				'size'        => 30,
@@ -381,11 +368,11 @@ class Amazonjs
 		$this->default_settings = array();
 		if ( is_array( $this->setting_fields ) ) {
 			foreach ( $this->setting_fields as $key => $field ) {
-				$this->default_settings[$key] = @$field['defaults'];
+				$this->default_settings[ $key ] = @$field['defaults'];
 			}
 		}
 		//delete_option($this->option_name);
-		$this->settings = wp_parse_args( (array)get_option( $this->option_name ), $this->default_settings );
+		$this->settings = wp_parse_args( (array) get_option( $this->option_name ), $this->default_settings );
 	}
 
 	function delete_settings() {
@@ -394,18 +381,18 @@ class Amazonjs
 
 	function validate_settings( $settings ) {
 		foreach ( $this->setting_fields as $key => $field ) {
-			if ( $field['type'] == 'checkbox' ) {
-				$settings[$key] = ( @$settings[$key] == 'on' || @$settings[$key] == '1' );
+			if ( 'checkbox' == $field['type'] ) {
+				$settings[ $key ] = ( 'on' == @$settings[ $key ] || '1' == @$settings[ $key ] );
 			}
 		}
 
 		foreach ( array( 'accessKeyId', 'secretAccessKey' ) as $key ) {
-			$settings[$key] = trim( $settings[$key] );
+			$settings[ $key ] = trim( $settings[ $key ] );
 		}
 
-		foreach ( $this->countries as $locale => $value ) {
-			$key            = 'associateTag' . $locale;
-			$settings[$key] = trim( $settings[$key] );
+		foreach ( $this->countries as $country_code => $value ) {
+			$key            = 'associateTag' . $country_code;
+			$settings[ $key ] = trim( $settings[ $key ] );
 		}
 
 		return $settings;
@@ -424,10 +411,10 @@ class Amazonjs
 		}
 	}
 
-	function get_amazon_official_link( $asin, $locale ) {
-		$tmpl = $this->countries[$locale]['linkTemplate'];
+	function get_amazon_official_link( $asin, $country_code ) {
+		$tmpl = $this->countries[ $country_code ]['linkTemplate'];
 		$item = array(
-			't'     => $this->settings['associateTag' . $locale],
+			't'     => $this->settings[ 'associateTag' . $country_code ],
 			'asins' => $asin,
 			'fc1'   => '000000',
 			'lc1'   => '0000FF',
@@ -441,7 +428,7 @@ class Amazonjs
 		return $this->tmpl( $tmpl, $item );
 	}
 
-	function shortcode( $atts /*, $content*/ ) {
+	function shortcode( $atts, /** @noinspection PhpUnusedParameterInspection */ $content ) {
 		/**
 		 * @var string $asin
 		 * @var string $tmpl
@@ -454,11 +441,11 @@ class Amazonjs
 		if ( empty($asin) ) {
 			return '';
 		}
-		$locale  = strtoupper( $locale );
+		$country_code  = strtoupper( $locale );
 		$imgsize = strtolower( $imgsize );
 		if ( is_feed() ) {
 			// use static html for rss reader
-			if ( $ai = $this->get_item( $locale, $asin ) ) {
+			if ( $ai = $this->get_item( $country_code, $asin ) ) {
 				$aimg = $ai['SmallImage'];
 				if ( array_key_exists( 'MediumImage', $ai ) ) {
 					$aimg = $ai['MediumImage'];
@@ -470,20 +457,20 @@ class Amazonjs
 </a>
 EOF;
 			}
-			return $this->get_amazon_official_link( $asin, $locale );
+			return $this->get_amazon_official_link( $asin, $country_code );
 		}
-		if ( ! isset($this->display_items[$locale]) ) {
-			$this->display_items[$locale] = array();
+		if ( ! isset($this->display_items[ $country_code ]) ) {
+			$this->display_items[ $country_code ] = array();
 		}
-		$item = (array_key_exists( $asin, $this->display_items[$locale] ))
-			? $this->display_items[$locale][$asin]
-			: $this->display_items[$locale][$asin] = $this->cache->get( $asin, $locale );
+		$item = (array_key_exists( $asin, $this->display_items[ $country_code ] ))
+			? $this->display_items[ $country_code ][ $asin ]
+			: $this->display_items[ $country_code ][ $asin ] =  get_site_transient("amazonjs_{$country_code}_{$asin}");
 		$url  = '#';
 		if ( is_array( $item ) && array_key_exists( 'DetailPageURL', $item ) ) {
 			$url = $item['DetailPageURL'];
 		}
 		$indicator_html = <<<EOF
-<div data-role="amazonjs" data-asin="{$asin}" data-locale="{$locale}" data-tmpl="${tmpl}" data-img-size="${imgsize}" class="asin_{$asin}_{$locale}_${tmpl} amazonjs_item"><div class="amazonjs_indicator"><span class="amazonjs_indicator_img"></span><a class="amazonjs_indicator_title" href="{$url}">{$title}</a><span class="amazonjs_indicator_footer"></span></div></div>
+<div data-role="amazonjs" data-asin="{$asin}" data-locale="{$country_code}" data-tmpl="${tmpl}" data-img-size="${imgsize}" class="asin_{$asin}_{$country_code}_${tmpl} amazonjs_item"><div class="amazonjs_indicator"><span class="amazonjs_indicator_img"></span><a class="amazonjs_indicator_title" href="{$url}">{$title}</a><span class="amazonjs_indicator_footer"></span></div></div>
 EOF;
 
 		$indicator_html = trim( $indicator_html );
@@ -491,7 +478,7 @@ EOF;
 			return $indicator_html;
 		}
 		$indicator_html = addslashes( $indicator_html );
-		$link_html      = $this->get_amazon_official_link( $asin, $locale, true );
+		$link_html      = $this->get_amazon_official_link( $asin, $country_code );
 
 		return <<<EOF
 <script type="text/javascript">document.write("{$indicator_html}")</script><noscript>{$link_html}</noscript>
@@ -499,12 +486,11 @@ EOF;
 	}
 
 	/**
-	 * Gets default country code by WPLANG
+	 * Gets default country code by get_locale
 	 * @return string
 	 */
 	function default_country_code() {
-		// https://codex.wordpress.org/WordPress_in_Your_Language
-		switch ( WPLANG ) {
+		switch ( get_locale() ) {
 			case 'en_CA':
 				return 'CA';
 			case 'de_DE':
@@ -526,11 +512,11 @@ EOF;
 	}
 
 	function get_item( $country_code, $asin ) {
-		if ( $ai = $this->cache->get( $asin, $country_code ) ) {
+		if ( $ai = get_site_transient( "amazonjs_{$country_code}_{$asin}" ) ) {
 			return $ai;
 		}
 		$items = $this->fetch_items( $country_code, array( $asin => false ) );
-		return @$items[$asin];
+		return @$items[ $asin ];
 	}
 
 	/**
@@ -540,21 +526,21 @@ EOF;
 	 */
 	function fetch_items( $country_code, $items ) {
 		$now     = time();
-		$itemids = array();
+		$item_ids = array();
 		foreach ( $items as $asin => $item ) {
 			if ( ! $item && $item['UpdatedAt'] + 86400 < $now ) {
-				$itemids[] = $asin;
+				$item_ids[] = $asin;
 			}
 		}
-		while ( count( $itemids ) ) {
+		while ( count( $item_ids ) ) {
 			// fetch via 10 products
 			// ItemLookup ItemId: Must be a valid item ID. For more than one ID, use a comma-separated list of up to ten IDs.
-			$itemid  = implode( ',', array_splice( $itemids, 0, 10 ) );
+			$itemid  = implode( ',', array_splice( $item_ids, 0, 10 ) );
 			$results = $this->itemlookup( $country_code, $itemid );
 			if ( $results && $results['success'] ) {
 				foreach ( $results['items'] as $item ) {
-					$items[$item['ASIN']] = $item;
-					$this->cache->save( $item, $item['ASIN'], $country_code );
+					$items[ $item['ASIN'] ] = $item;
+					set_site_transient("amazonjs_{$country_code}_{$item['ASIN']}", $item, self::CACHE_LIFETIME);
 				}
 			}
 		}
@@ -614,28 +600,32 @@ EOF;
 		list ($key, $field) = $args;
 		$id    = $this->option_name . '_' . $key;
 		$name  = $this->option_name . "[{$key}]";
-		$value = $this->settings[$key];
+		$value = $this->settings[ $key ];
 		if ( isset($field['html']) ) {
 			echo '' . $field['html'] . '';
 		} else {
 			switch ( $field['type'] ) {
 				case 'checkbox':
 					?>
-					<input id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" type="checkbox" value="1" <?php checked( true, $value ); ?> />
+					<input id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" type="checkbox" <?php checked( true, $value ); ?> value="1" />
 					<label for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 					<?php
 					break;
 				case 'radio':
+					$index = 1;
 					foreach ( $field['options'] as $v => $content ) {
+						$input_element_id = $id . '_' . $index;
 						?>
-						<input name="<?php echo esc_attr( $name ); ?>" type="radio" <?php checked( $v, $value ); ?> value="<?php echo esc_attr( $v ); ?>"><?php echo esc_html( $content ); ?>
+						<input id="<?php echo esc_attr( $input_element_id ); ?>" name="<?php echo esc_attr( $name ); ?>" type="radio" <?php checked( $v, $value ); ?> value="<?php echo esc_attr( $v ); ?>" />
+						<label for="<?php echo esc_attr( $input_element_id ); ?>"><?php echo esc_html( $content ); ?></label>
 						<?php
+						$index++;
 					}
 					break;
 				case 'select':
 					?>
-					<select id="<?php echo esc_attr( $id ); ?>" name=<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( $value ); ?>">
-					<?php foreach ( $field['options'] as $option => $name ): ?>
+					<select id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>">
+					<?php foreach ( $field['options'] as $option => $name ) : ?>
 						<option value="<?php echo esc_attr( $option ); ?>" <?php selected( $option, $value ); ?>><?php echo esc_html( $name ); ?></option>
 					<?php endforeach ?>
 					</select>
@@ -664,7 +654,7 @@ EOF;
 
 	function media_buttons() {
 		global $post_ID, $temp_ID;
-		$iframe_ID  = (int)(0 == $post_ID ? $temp_ID : $post_ID);
+		$iframe_ID  = (int) ( 0 == $post_ID ? $temp_ID : $post_ID );
 		$iframe_src = 'media-upload.php?post_id=' . $iframe_ID . '&amp;type=' . $this->media_type . '&amp;tab=' . $this->media_type . '_keyword';
 		$label      = __( 'Add Amazon Link', $this->text_domain );
 		?>
@@ -696,10 +686,10 @@ EOF;
 		wp_iframe( 'media_upload_type_amazonjs_id' );
 	}
 
-	function media_upload_tabs( /*$tabs*/ ) {
+	function media_upload_tabs( /** @noinspection PhpUnusedParameterInspection */$tabs ) {
 		return array(
 			$this->media_type . '_keyword' => __( 'Keyword Search', $this->text_domain ),
-			$this->media_type . '_id'      => __( 'Search by ASIN/URL', $this->text_domain )
+			$this->media_type . '_id'      => __( 'Search by ASIN/URL', $this->text_domain ),
 		);
 	}
 
@@ -708,6 +698,7 @@ EOF;
 		<div class="wrap wrap-amazonjs">
 			<h2><?php echo esc_html( $this->title ); ?></h2>
 			<?php $this->options_page_header(); ?>
+			<!--suppress HtmlUnknownTarget -->
 			<form action="options.php" method="post">
 				<?php settings_fields( $this->option_name ); ?>
 				<?php do_settings_sections( $this->option_page_name ); ?>
@@ -718,20 +709,10 @@ EOF;
 	}
 
 	function options_page_header() {
-		$cache_dir_exists = @is_dir( $this->cache_dir );
 		?>
-		<?php if ( ! function_exists( 'simplexml_load_string' ) ): ?>
+		<?php if ( ! function_exists( 'simplexml_load_string' ) ) : ?>
 			<div class="error">
 				<p><?php printf( __( 'Error! "simplexml_load_string" function is not found. %s requires PHP 5 and SimpleXML extension.', $this->text_domain ), $this->title ); ?></p>
-			</div>
-		<?php endif ?>
-		<?php if ( ! $cache_dir_exists ): ?>
-			<div class="error">
-				<p><?php printf( __( 'Warning! Cache directory is not exist. Please create writable directory: <br/><code>%s</code>', $this->text_domain ), $this->cache_dir ); ?></p>
-			</div>
-		<?php elseif ( ! is_writable( $this->cache_dir ) ): ?>
-			<div class="error">
-				<p><?php printf( __( 'Warning! Cache Directory "%s" is not writable, set permission as 0777.', $this->text_domain ), $this->cache_dir ); ?></p>
 			</div>
 		<?php endif ?>
 	<?php
@@ -745,6 +726,7 @@ EOF;
 		return $this->amazon_get( $countryCode, $options );
 	}
 
+	// amazon api
 	function itemsearch( $countryCode, $searchIndex, $keywords, $itemPage = 0 ) {
 		$options = array();
 		if ( $itemPage > 0 ) {
@@ -752,11 +734,27 @@ EOF;
 		}
 		$options['Keywords']  = $keywords;
 		$options['Operation'] = 'ItemSearch';
-		if ( $searchIndex ) $options['SearchIndex'] = $searchIndex;
+		if ( $searchIndex ) {
+			$options['SearchIndex'] = $searchIndex;
+		}
 		return $this->amazon_get( $countryCode, $options );
 	}
 
+	/**
+	 * parse ASIN from URL
+	 * @param string $url
+	 * @return bool|string
+	 */
+	static function parse_asin( $url ) {
+		if ( preg_match( '/^https?:\/\/.+\.amazon\.([^\/]+).+\/(dp|gp\/product|ASIN)\/([^\/]+)/', $url, $matches ) ) {
+			return $matches[3];
+		}
+		return null;
+	}
+
 	function ajax_amazonjs_search() {
+		$itemId = null;
+
 		// from http get
 		$itemPage    = @$_GET['ItemPage'];
 		$id          = @$_GET['ID'];
@@ -766,16 +764,20 @@ EOF;
 
 		if ( ! empty($id) ) {
 			if ( preg_match( '/^https?:\/\//', $id ) ) {
-				// parse ItemId from URL
-				if ( preg_match( '/^https?:\/\/.+\.amazon\.([^\/]+).+(\/dp\/|\/gp\/product\/)([^\/]+)/', $id, $matches ) ) {
-					//$domain = $matches[1];
-					$itemId = $matches[3];
-				}
-				if ( ! isset($itemId) ) {
+				if ( $asin = self::parse_asin( $id ) ) {
+					$itemId = $asin;
+				} else {
+					// url string as query keyword
 					$keywords = $id;
 				}
 			} else {
 				$itemId = $id;
+			}
+		} else if ( ! empty($keywords) ) {
+			if ( preg_match( '/^https?:\/\//', $keywords ) ) {
+				if ( $asin = self::parse_asin( $keywords ) ) {
+					$itemId = $asin;
+				}
 			}
 		}
 		$amazonjs = new Amazonjs();
@@ -790,10 +792,10 @@ EOF;
 	}
 
 	function amazon_get( $countryCode, $options ) {
-		$baseUri         = $this->countries[$countryCode]['baseUri'];
+		$baseUri         = $this->countries[ $countryCode ]['baseUri'];
 		$accessKeyId     = @trim( $this->settings['accessKeyId'] );
 		$secretAccessKey = @trim( $this->settings['secretAccessKey'] );
-		$associateTag    = @$this->settings['associateTag' . $countryCode];
+		$associateTag    = @$this->settings[ 'associateTag' . $countryCode ];
 
 		// validate request
 		if ( empty($countryCode) || (empty($options['ItemId']) && empty($options['Keywords'])) || (empty($accessKeyId) || empty($secretAccessKey)) ) {
@@ -811,11 +813,14 @@ EOF;
 		$options['Version']       = self::AWS_VERSION;
 		ksort( $options );
 		$params = array();
-		foreach ( $options as $k => $v ) $params[] = $k . '=' . self::urlencode_rfc3986( $v );
+		foreach ( $options as $k => $v ) {
+			$params[] = $k . '=' . self::urlencode_rfc3986( $v );
+		}
 		$query = implode( '&', $params );
-		unset($params);
-		$signature = sprintf( "GET\n%s\n/onca/xml\n%s", str_replace( 'http://', '', $baseUri ), $query );
+		$urlInfo = parse_url( $baseUri );
+		$signature = sprintf( "GET\n%s\n/onca/xml\n%s", $urlInfo['host'], $query );
 		$signature = base64_encode( hash_hmac( 'sha256', $signature, $secretAccessKey, true ) );
+		unset($params, $urlInfo);
 
 		$url = sprintf( '%s/onca/xml?%s&Signature=%s', $baseUri, $query, self::urlencode_rfc3986( $signature ) );
 
@@ -845,7 +850,8 @@ EOF;
 		$fetchedAt = time();
 
 		$success = false;
-		$xml     = @simplexml_load_string( $body );
+		/* @var $xml stdClass */
+		$xml = @simplexml_load_string( $body );
 		if ( WP_DEBUG ) {
 			if ( ! $xml ) {
 				error_log( 'amazonjs: cannot parse xml: ' . $body );
@@ -853,30 +859,30 @@ EOF;
 		}
 
 		if ( $xml ) {
-			if ( 'True' == (string)@$xml->Items->Request->IsValid ) {
+			if ( 'True' == (string) @$xml->Items->Request->IsValid ) {
 				$success   = true;
 				$items     = array();
 				$operation = $options['Operation'];
-				if ( $operation == 'ItemSearch' ) {
-					$os                 = array(); // opensearch
+				if ( 'ItemSearch' == $operation ) {
+					$os                 = array(); // OpenSearch
 					$request            = $xml->Items->Request->ItemSearchRequest;
 					$resultMap          = self::to_array( $xml->Items->SearchResultsMap );
 					$itemsParPage       = 10;
-					$startPage          = ($request->ItemPage) ? (int)$request->ItemPage : 1;
+					$startPage          = ($request->ItemPage) ? (int) $request->ItemPage : 1;
 					$os['itemsPerPage'] = $itemsParPage;
 					$os['startIndex']   = ($startPage - 1) * $itemsParPage + 1;
-					$os['Query']        = array( 'searchTerms' => (string)$request->Keywords, 'startPage' => $startPage );
+					$os['Query']        = array( 'searchTerms' => (string) $request->Keywords, 'startPage' => $startPage );
 				}
-				$os['totalResults'] = (int)$xml->Items->TotalResults;
-				$os['totalPages']   = (int)$xml->Items->TotalPages;
+				$os['totalResults'] = (int) $xml->Items->TotalResults;
+				$os['totalPages']   = (int) $xml->Items->TotalPages;
 
 				foreach ( $xml->Items->Item as $item ) {
 					$r                  = self::to_array( $item->ItemAttributes );
-					$r['ASIN']          = trim( (string)$item->ASIN );
-					$r['DetailPageURL'] = trim( (string)$item->DetailPageURL );
-					$r['SalesRank']     = (int)$item->SalesRank;
+					$r['ASIN']          = trim( (string) $item->ASIN );
+					$r['DetailPageURL'] = trim( (string) $item->DetailPageURL );
+					$r['SalesRank']     = (int) $item->SalesRank;
 					if ( $reviews = $item->CustomerReviews ) {
-						$r['IFrameReviewURL'] = (string)$reviews->IFrameURL;
+						$r['IFrameReviewURL'] = (string) $reviews->IFrameURL;
 					}
 					$r['OfferSummary'] = self::to_array( $item->OfferSummary );
 					$r['SmallImage']   = self::image_element( $item->SmallImage );
@@ -886,26 +892,26 @@ EOF;
 					$r['UpdatedAt']    = $fetchedAt;
 					$items[]           = $r;
 				}
-				if ( $operation == 'ItemLookup' ) {
-					if ( $os['totalResults'] == 0 ) {
+				if ( 'ItemLookup' == $operation ) {
+					if ( 0 == $os['totalResults'] ) {
 						$os['totalResults'] = count( $items );
 					}
-					if ( $os['totalPages'] == 0 ) {
+					if ( 0 == $os['totalPages'] ) {
 						$os['totalPages'] = 1;
 					}
 				}
 			} else {
 				if ( $error = @$xml->Items->Request->Errors->Error ) {
 					$message = __( 'Amazon Product Advertising API Error', $this->text_domain );
-					$error_code    = (string)@$error->Code;
-					$error_message = (string)@$error->Message;
+					$error_code    = (string) @$error->Code;
+					$error_message = (string) @$error->Message;
 				} elseif ( $error = @$xml->Error ) {
 					$message = __( 'Amazon Product Advertising API Error', $this->text_domain );
-					$error_code    = (string)@$error->Code;
-					$error_message = (string)@$error->Message;
+					$error_code    = (string) @$error->Code;
+					$error_message = (string) @$error->Message;
 				} else {
 					$message    = __( 'Cannot Parse Amazon Product Advertising API Response' );
-					$error_body = (string)$body;
+					$error_body = (string) $body;
 				}
 			}
 		} else {
@@ -916,7 +922,7 @@ EOF;
 
 	static function to_array( $element ) {
 		$orgElement = $element;
-		if ( is_object( $element ) && get_class( $element ) == 'SimpleXMLElement' ) {
+		if ( is_object( $element ) && 'SimpleXMLElement' == get_class( $element ) ) {
 			$element = get_object_vars( $element );
 		}
 		if ( is_array( $element ) ) {
@@ -925,10 +931,10 @@ EOF;
 				return trim( strval( $orgElement ) );
 			}
 			foreach ( $element as $key => $value ) {
-				if ( is_string( $key ) && $key == '@attributes' ) {
+				if ( is_string( $key ) && '@attributes' == $key ) {
 					continue;
 				}
-				$result[$key] = self::to_array( $value );
+				$result[ $key ] = self::to_array( $value );
 			}
 			return $result;
 		} else {
@@ -938,9 +944,9 @@ EOF;
 
 	static function image_element( $element ) {
 		if ( $element ) {
-			$src    = trim( (string)@$element->URL );
-			$width  = (int)@$element->Width;
-			$height = (int)@$element->Height;
+			$src    = trim( (string) @$element->URL );
+			$width  = (int) @$element->Width;
+			$height = (int) @$element->Height;
 			return compact( 'src', 'width', 'height' );
 		}
 		return null;

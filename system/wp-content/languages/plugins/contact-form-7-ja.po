@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-03-31 07:14:15+0000\n"
+"PO-Revision-Date: 2016-04-24 02:50:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/1.1.0-alpha\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
 "Project-Id-Version: Stable (latest release)\n"
 
 #: admin/admin.php:330
@@ -16,7 +16,7 @@ msgstr "設定検証についての FAQ"
 
 #: admin/admin.php:330
 msgid "http://contactform7.com/configuration-validator-faq/"
-msgstr "http://contactform7.com/ja/configuration-validator-faq/"
+msgstr "http://contactform7.com/configuration-validator-faq/"
 
 #: modules/date.php:123
 msgid "The date is before the earliest one allowed."
@@ -918,7 +918,7 @@ msgstr "Takayuki Miyoshi"
 msgid "http://ideasilo.wordpress.com/"
 msgstr "http://ideasilo.wordpress.com/"
 
-#. #-#-#-#-#  tmp-contact-form-7.pot (Contact Form 7 4.4.1)  #-#-#-#-#
+#. #-#-#-#-#  tmp-contact-form-7.pot (Contact Form 7 4.4.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: admin/admin.php:20 modules/flamingo.php:137
 msgid "Contact Form 7"

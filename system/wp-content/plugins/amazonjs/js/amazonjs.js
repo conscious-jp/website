@@ -277,7 +277,7 @@
 						}
 					}
 				}
-				if (amazonjsVars.isFadeInEnabled) {
+				if ($.amazonjs.isFadeInEnabled) {
 					function fadeIn() {
 						if ($items.length > 0) {
 							var $item = $items.shift();
@@ -329,7 +329,7 @@
 				return defaultTmpl;
 			},
 			prepareData:function (item) {
-				
+
 				// workaround: https://forums.aws.amazon.com/thread.jspa?messageID=435131
 				if (isHttpsScheme) {
 					$.each(this.imageAttributes, function(i, v) {
@@ -380,34 +380,53 @@
 						return this.data._InfoMarginLeft = margin;
 					}
 				});
+			},
+			execute: function() {
+				var amazonjsVars = window.amazonjsVars;
+				if (amazonjsVars) {
+					function render() {
+						if (!amazonjsVars.items) {
+							return;
+						}
+						if ($.amazonjs.isExecuted) {
+							return;
+						}
+						if (amazonjsVars.isCustomerReviewEnabled) {
+							if (typeof tb_pathToImage === 'undefined') {
+								tb_pathToImage = amazonjsVars.thickboxUrl + '/loadingAnimation.gif';
+							}
+							if (typeof tb_closeImage === 'undefined') {
+								tb_closeImage = amazonjsVars.thickboxUrl + '/tb-close.png';
+							}
+						}
+						$.amazonjs.isFadeInEnabled = amazonjsVars.isFadeInEnabled;
+						$.amazonjs.isCustomerReviewEnabled = amazonjsVars.isCustomerReviewEnabled;
+						$.amazonjs.isTrackEventEnabled = amazonjsVars.isTrackEventEnabled;
+						$.amazonjs.resource = amazonjsVars.resource;
+						$.amazonjs.template(amazonjsVars.regionTemplate);
+						$.amazonjs.render(amazonjsVars.items);
+						$.amazonjs.isExecuted = true;
+					}
+					if (amazonjsVars.isFadeInEnabled) {
+						setTimeout(function () {
+							render();
+						}, 1000);
+					} else {
+						render();
+					}
+				}
 			}
 		}
 	});
-
-	if (amazonjsVars) {
-		function render() {
-			if (amazonjsVars.isCustomerReviewEnabled) {
-				if (typeof tb_pathToImage === 'undefined') {
-					tb_pathToImage = amazonjsVars.thickboxUrl + '/loadingAnimation.gif';
-				}
-				if (typeof tb_closeImage === 'undefined') {
-					tb_closeImage = amazonjsVars.thickboxUrl + '/tb-close.png';
-				}
-			}
-			$.amazonjs.isCustomerReviewEnabled = amazonjsVars.isCustomerReviewEnabled;
-			$.amazonjs.isTrackEventEnabled = amazonjsVars.isTrackEventEnabled;
-			$.amazonjs.resource = amazonjsVars.resource;
-			$.amazonjs.template(amazonjsVars.regionTempalte);
-			$.amazonjs.render(amazonjsVars.items);
-		}
-
-		$(document).ready(function(){
-			if (amazonjsVars.isFadeInEnabled) {
-				setTimeout(function () { render(); }, 1000);
-			} else {
-				render();
-			}
+	$(document).ready(function(){
+		$.amazonjs.execute();
+	});
+	$(window).load(function() {
+		$.amazonjs.execute();
+	});
+	if (document.addEventListener) {
+		document.addEventListener('DOMContentLoaded', function () {
+			$.amazonjs.execute();
 		});
 	}
-
 })(jQuery);

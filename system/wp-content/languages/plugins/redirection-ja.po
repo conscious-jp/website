@@ -2,31 +2,21 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-11-15 05:46:52+0000\n"
+"PO-Revision-Date: 2016-04-07 04:59:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/1.0-alpha-1100\n"
+"X-Generator: GlotPress/1.1.0-alpha\n"
 "Project-Id-Version: Stable (latest release)\n"
 
-#: models/pager.php:58 models/pager.php:102 models/pager.php:259
-#: models/pager.php:301
-msgid "Disable"
-msgstr "無効化"
+#: view/options.php:108
+msgid "Are you sure you want to delete everything?"
+msgstr ""
 
-#: models/pager.php:60 models/pager.php:101 models/pager.php:261
-#: models/pager.php:300
-msgid "Enable"
-msgstr "有効化"
-
-#: redirection-admin.php:133
-msgid "Settings"
-msgstr "設定"
-
-#: view/item-edit.php:13
-msgid "Description"
-msgstr "説明"
+#: view/item-edit.php:35
+msgid "Advanced Settings"
+msgstr "高度な設定（通常は必要ありません）"
 
 #: matches/login.php:27
 msgid "URL and login status"
@@ -131,14 +121,6 @@ msgstr "ユーザーエージェント"
 msgid "The visitor will be redirected from the source URL if the user agent matches.  You can specify a <em>matched</em> target URL as the address to send visitors if they do match, and <em>not matched</em> if they don't match.  Leaving a URL blank means that the visitor is not redirected. <strong>All matches are performed as regular expressions</strong>.\n"
 msgstr "もしユーザーエージェントが一致する場合、ソース URL から転送されます。<strong>一致の場合</strong>と<strong>不一致の場合</strong>に転送先にするターゲット URL をそれぞれ指定できます。URL を空のままにした場合、ユーザーは転送されません。<strong>一致条件の判定はすべて正規表現で行われます</strong>。\n"
 
-#: modules/wordpress.php:127
-msgid "WordPress"
-msgstr "WordPress"
-
-#: modules/apache.php:108
-msgid "Apache"
-msgstr "Apache"
-
 #: models/database.php:98 models/group.php:109 view/item-list.php:5
 msgid "Redirections"
 msgstr "転送ルール"
@@ -173,9 +155,23 @@ msgstr "編集"
 msgid "Delete"
 msgstr "削除"
 
+#: models/pager.php:58 models/pager.php:102 models/pager.php:259
+#: models/pager.php:301
+msgid "Disable"
+msgstr "無効化"
+
+#: models/pager.php:60 models/pager.php:101 models/pager.php:261
+#: models/pager.php:300
+msgid "Enable"
+msgstr "有効化"
+
 #: models/pager.php:103
 msgid "Reset Hits"
 msgstr "訪問数をリセット"
+
+#: models/pager.php:150
+msgid "No group filter"
+msgstr "グループフィルターなし"
 
 #: models/pager.php:163 models/pager.php:363
 msgid "Filter"
@@ -189,9 +185,21 @@ msgstr "名称"
 msgid "Redirects"
 msgstr "転送ルール"
 
+#: models/pager.php:244 models/pager.php:708 view/group-edit.php:8
+msgid "Module"
+msgstr "モジュール"
+
 #: models/pager.php:254
 msgid "View Redirects"
 msgstr "転送ルールを表示"
+
+#: models/pager.php:278
+msgid "Unknown"
+msgstr "不明"
+
+#: models/pager.php:355
+msgid "All modules"
+msgstr "すべてのモジュール"
 
 #: models/pager.php:440 models/pager.php:574
 msgid "Add redirect"
@@ -214,49 +222,117 @@ msgstr "IP"
 msgid "Show only this IP"
 msgstr "この IP のみ表示"
 
-#: view/group-list.php:5 view/submenu.php:11
-msgid "Groups"
-msgstr "グループ"
+#: models/pager.php:719
+msgid "Configure"
+msgstr "設定"
 
-#: models/redirect.php:153
+#: models/redirect.php:161
 msgid "Source and target URL must be different"
 msgstr "ソースとターゲット URL は異なるものを指定してください"
 
 #: models/redirect.php:167
+msgid "You can only redirect from a relative URL (<code>%s</code>) on this domain (<code>%s</code>)."
+msgstr ""
+
+#: models/redirect.php:175
 msgid "Invalid group when creating redirect"
 msgstr "転送ルールを作成する際に無効なグループが指定されました"
 
-#: models/redirect.php:170
+#: models/redirect.php:178
 msgid "Invalid source URL when creating redirect for given match type"
 msgstr "指定された一致タイプの転送ルールを作成する際に無効なソース URL が入力されました"
 
-#: models/redirect.php:206
+#: models/redirect.php:214
 msgid "Unable to add new redirect - delete Redirection from the options page and re-install"
 msgstr "新規転送ルールを追加できません。設定ページから転送ルールを削除し、再インストールしてください。"
 
-#: models/redirect.php:376
+#: models/redirect.php:384
 msgid "Redirect to URL"
 msgstr "URL へ転送"
 
-#: models/redirect.php:377
+#: models/redirect.php:385
 msgid "Redirect to random post"
 msgstr "ランダムな記事へ転送"
 
-#: models/redirect.php:378
+#: models/redirect.php:386
 msgid "Pass-through"
 msgstr "通過"
 
-#: models/redirect.php:379
+#: models/redirect.php:387
 msgid "Error (404)"
 msgstr "エラー (404)"
 
-#: models/redirect.php:380
+#: models/redirect.php:388
 msgid "Do nothing"
 msgstr "何もしない"
+
+#: modules/apache.php:63
+msgid "Cannot write to chosen location - check path and permissions."
+msgstr "選択された場所には書き込めません。パスと権限を確認して下さい。"
+
+#: modules/apache.php:76
+msgid ".htaccess Location"
+msgstr ".htaccess ファイルの場所"
+
+#: modules/apache.php:80
+msgid "If you want Redirection to automatically update your <code>.htaccess</code> file then enter the full path and filename here. You can also download the file and update it manually."
+msgstr ""
 
 #: modules/apache.php:81
 msgid "WordPress is installed in: <code>%s</code>"
 msgstr "WordPress のインストール位置: <code>%s</code>"
+
+#: modules/apache.php:85
+msgid "Canonical URL"
+msgstr "カノニカル URL"
+
+#: modules/apache.php:88
+msgid "Default server"
+msgstr "デフォルトサーバー"
+
+#: modules/apache.php:89
+msgid "Remove WWW (%s)"
+msgstr "WWW を除去 (%s)"
+
+#: modules/apache.php:90
+msgid "Add WWW (www.%s)"
+msgstr "WWW を追加 (www.%s)"
+
+#: modules/apache.php:93
+msgid "Automatically remove or add www to your site."
+msgstr "自動的にサイト URL の www を除去または追加。"
+
+#: modules/apache.php:102
+msgid "<code>.htaccess</code> saved to %s"
+msgstr "<code>.htaccess</code> を %s に保存しました"
+
+#: modules/apache.php:108
+msgid "Apache"
+msgstr "Apache"
+
+#: modules/apache.php:112
+msgid "Uses Apache <code>.htaccess</code> files. Requires further configuration. The redirect happens without loading WordPress. No tracking of hits."
+msgstr ""
+
+#: modules/nginx.php:41
+msgid "Nginx"
+msgstr "Nginx"
+
+#: modules/nginx.php:45
+msgid "For use with Nginx server. Requires manual configuration. The redirect happens without loading WordPress. No tracking of hits. This is an experimental module."
+msgstr ""
+
+#: modules/wordpress.php:127
+msgid "WordPress"
+msgstr "WordPress"
+
+#: modules/wordpress.php:131
+msgid "WordPress-powered redirects. This requires no further configuration, and you can track hits."
+msgstr ""
+
+#: redirection-admin.php:133
+msgid "Settings"
+msgstr "設定"
 
 #: redirection-admin.php:145
 msgid "Log entries"
@@ -266,7 +342,7 @@ msgstr "エントリーのログを保存"
 msgid "Sorry, unable to do that. Please try refreshing the page."
 msgstr "ご指定の操作は実行できません。ページを再読み込みしてみてください。"
 
-#. #-#-#-#-#  tmp-redirection.pot (Redirection 2.4.2)  #-#-#-#-#
+#. #-#-#-#-#  tmp-redirection.pot (Redirection 2.4.4)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: redirection-admin.php:156
 msgid "Redirection"
@@ -312,6 +388,19 @@ msgstr "操作を実行できません"
 msgid "Sorry, but your redirection was not created"
 msgstr "転送ルールを作成できませんでした。"
 
+#: redirection-admin.php:488
+msgid "Invalid module"
+msgstr "無効なモジュール"
+
+#: redirection-admin.php:504
+msgid "Download"
+msgstr "ダウンロード"
+
+#: redirection-admin.php:505 view/group-edit.php:22 view/item-edit.php:33
+#: view/module-edit.php:13
+msgid "Cancel"
+msgstr "キャンセル"
+
 #: view/add.php:4
 msgid "Add new redirection"
 msgstr "新しい転送ルールを追加"
@@ -332,7 +421,7 @@ msgstr "操作"
 msgid "Regular expression"
 msgstr "正規表現"
 
-#: view/add.php:36 view/item-edit.php:20
+#: view/add.php:36 view/item-edit.php:18
 msgid "Group"
 msgstr "グループ"
 
@@ -340,14 +429,13 @@ msgstr "グループ"
 msgid "Add Redirection"
 msgstr "新しい転送ルールを追加"
 
-#: view/group-edit.php:21 view/item-edit.php:34 view/module-edit.php:12
+#: view/group-edit.php:21 view/item-edit.php:32 view/module-edit.php:12
 msgid "Save"
 msgstr "保存"
 
-#: redirection-admin.php:505 view/group-edit.php:22 view/item-edit.php:35
-#: view/module-edit.php:13
-msgid "Cancel"
-msgstr "キャンセル"
+#: view/group-list.php:5 view/submenu.php:11
+msgid "Groups"
+msgstr "グループ"
 
 #: view/group-list.php:13 view/item-list.php:12 view/log.php:13
 msgid "Search"
@@ -357,11 +445,19 @@ msgstr "検索"
 msgid "Add Group"
 msgstr "グループを追加"
 
+#: view/group-list.php:24
+msgid "Use groups to organise your redirects. Groups are assigned to a module, which affects how the redirects in that group work. If you are unsure then stick to the WordPress module."
+msgstr ""
+
 #: view/group-list.php:44
 msgid "Add"
 msgstr "追加"
 
-#: view/item-edit.php:16
+#: view/item-edit.php:11
+msgid "Description"
+msgstr "説明"
+
+#: view/item-edit.php:14
 msgid "optional"
 msgstr "オプション"
 
@@ -457,6 +553,10 @@ msgstr "リディレクションログ RSS にフィードリーダーからア�
 msgid "Auto-generate URL"
 msgstr "URL を自動生成 "
 
+#: view/options.php:74
+msgid "This will be used to auto-generate a URL if no URL is given.  You can use the special tags <code>$dec$</code> or <code>$hex$</code> to have a unique ID inserted (either decimal or hex)"
+msgstr ""
+
 #: view/options.php:79
 msgid "Update"
 msgstr "更新"
@@ -464,6 +564,10 @@ msgstr "更新"
 #: view/options.php:85
 msgid "Import"
 msgstr "インポート"
+
+#: view/options.php:87
+msgid "Here you can import redirections from an existing <code>.htaccess</code> file, or a CSV file."
+msgstr ""
 
 #: view/options.php:94
 msgid "Import into"
@@ -537,82 +641,18 @@ msgstr "﻿多言語をご存知の場合、翻訳という形で寄付をして
 msgid "Full details of producing a translation can be found in this <a href=\"http://urbangiraffe.com/articles/translating-wordpress-themes-and-plugins/\">guide to translating WordPress plugins</a>."
 msgstr "翻訳作成に関する詳細は<a href=\"http://urbangiraffe.com/articles/translating-wordpress-themes-and-plugins/\">翻訳プロセスのガイドライン</a>をご覧ください。"
 
-#: models/pager.php:244 models/pager.php:708 view/group-edit.php:8
-msgid "Module"
-msgstr "モジュール"
+#. Plugin URI of the plugin/theme
+msgid "http://urbangiraffe.com/plugins/redirection/"
+msgstr "http://urbangiraffe.com/plugins/redirection/"
 
-#: models/pager.php:278
-msgid "Unknown"
-msgstr "不明"
-
-#: models/pager.php:355
-msgid "All modules"
-msgstr "すべてのモジュール"
-
-#: models/pager.php:719
-msgid "Configure"
-msgstr "設定"
-
-#: models/pager.php:150
-msgid "No group filter"
-msgstr "グループフィルターなし"
-
-#: modules/apache.php:76
-msgid ".htaccess Location"
-msgstr ".htaccess ファイルの場所"
-
-#: modules/apache.php:85
-msgid "Canonical URL"
-msgstr "カノニカル URL"
-
-#: modules/apache.php:88
-msgid "Default server"
-msgstr "デフォルトサーバー"
-
-#: modules/apache.php:89
-msgid "Remove WWW (%s)"
-msgstr "WWW を除去 (%s)"
-
-#: modules/apache.php:90
-msgid "Add WWW (www.%s)"
-msgstr "WWW を追加 (www.%s)"
-
-#: modules/apache.php:93
-msgid "Automatically remove or add www to your site."
-msgstr "自動的にサイト URL の www を除去または追加。"
-
-#: modules/apache.php:102
-msgid "<code>.htaccess</code> saved to %s"
-msgstr "<code>.htaccess</code> を %s に保存しました"
-
-#: modules/nginx.php:41
-msgid "Nginx"
-msgstr "Nginx"
+#. Description of the plugin/theme
+msgid "Manage all your 301 redirects and monitor 404 errors"
+msgstr "すべての 301 リダイレクトを管理し、404 エラーをモニター"
 
 #. Author of the plugin/theme
 msgid "John Godley"
 msgstr "John Godley"
 
-#. Plugin URI of the plugin/theme
-msgid "http://urbangiraffe.com/plugins/redirection/"
-msgstr "http://urbangiraffe.com/plugins/redirection/"
-
 #. Author URI of the plugin/theme
 msgid "http://urbangiraffe.com"
 msgstr "http://urbangiraffe.com"
-
-#: redirection-admin.php:504
-msgid "Download"
-msgstr "ダウンロード"
-
-#: redirection-admin.php:488
-msgid "Invalid module"
-msgstr "無効なモジュール"
-
-#: modules/apache.php:63
-msgid "Cannot write to chosen location - check path and permissions."
-msgstr "選択された場所には書き込めません。パスと権限を確認して下さい。"
-
-#. Description of the plugin/theme
-msgid "Manage all your 301 redirects and monitor 404 errors"
-msgstr "すべての 301 リダイレクトを管理し、404 エラーをモニター"
